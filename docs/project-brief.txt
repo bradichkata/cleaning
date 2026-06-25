@@ -1,0 +1,745 @@
+1. Software you need
+
+VS Code with Codex is your editor and AI programming assistant. It is not enough by itself because it cannot execute, compile, or serve a modern web application.
+
+Install the following:
+
+Required
+Node.js 24 LTS
+
+Node.js runs the development server, installs packages, builds the website, and executes server-side code. Next.js currently requires Node.js 20.9 or newer, so Node.js 24 LTS is a suitable choice. npm is installed automatically with Node.js.
+
+After installation, confirm it in the VS Code terminal:
+
+node --version
+npm --version
+Git
+
+Use Git for version control, restoring previous versions, working with Codex safely, and deploying through GitHub.
+
+A GitHub account
+
+Store the project repository privately and connect it to your hosting provider.
+
+A modern browser
+
+Chrome or Edge is sufficient for testing and using developer tools.
+
+Optional
+Figma — wireframes and visual design.
+PostgreSQL — do not install it locally initially; use a hosted database when required.
+Docker Desktop — unnecessary for the first version.
+Postman — useful later for testing APIs, but not required.
+Image editor — useful for compressing before-and-after photographs.
+Recommended stack
+
+For this website, I would use:
+
+Frontend and backend: Next.js
+Language: TypeScript
+Styling: Tailwind CSS
+UI components: shadcn/ui
+Forms: React Hook Form + Zod
+Database: Supabase PostgreSQL
+Email: Resend or SMTP
+Payments: Stripe Checkout, if required
+Hosting: Vercel or Railway
+Source control: GitHub
+
+Next.js can run as a complete Node.js application, a Docker container, or a limited static export. You therefore do not need a separate NestJS backend for the first version.
+
+Supabase supplies a hosted PostgreSQL database and can later provide authentication and file storage.
+
+Stripe Checkout can be introduced later for deposits, one-time cleaning payments, or recurring plans without creating an entire payment interface from scratch.
+
+Create the project
+
+Open a terminal in the folder where you keep projects:
+
+npx create-next-app@latest cleaning-services
+
+Choose:
+
+TypeScript: Yes
+ESLint: Yes
+Tailwind CSS: Yes
+src directory: Yes
+App Router: Yes
+Turbopack: Yes
+Import alias: @/*
+
+Then:
+
+cd cleaning-services
+npm run dev
+
+Open:
+
+http://localhost:3000
+
+create-next-app is the official and simplest method for creating a new Next.js application.
+
+2. Professional cleaning-services website
+
+The website has three fundamental jobs:
+
+Establish trust.
+Explain exactly what is cleaned and how much it costs.
+Convert the visitor into a call, quotation request, or booking.
+
+Everything that does not support one of these objectives is secondary.
+
+Recommended business model
+
+The architecture should support both immediate customers and customers who are not yet ready to book.
+
+Visitor
+  ↓
+Selects service
+  ↓
+Checks coverage, process and approximate price
+  ↓
+Requests quote or books inspection
+  ↓
+Business receives structured request
+  ↓
+Business confirms final price and appointment
+
+For most cleaning companies, an instant-price calculator should initially produce an estimate, not a binding final price. Extremely dirty properties, parking problems, large windows, specialist materials, pets, furniture, and access restrictions can substantially change the required work.
+
+Visual design
+Design direction
+
+Use a clean, premium, reassuring appearance—not a website covered in bubbles, cartoon mops, and generic stock photographs.
+
+Recommended visual identity:
+
+Primary colour:       Deep navy         #102A43
+Secondary colour:     Clean turquoise   #1CB5A3
+Background:           Soft white        #F7FAFC
+Surface background:   White             #FFFFFF
+Main text:            Charcoal          #1C2733
+Muted text:           Slate grey        #607080
+Success/accent:       Fresh green        #36A269
+Warning/highlight:    Warm gold         #E9A23B
+
+Typography:
+
+Headings: Manrope or Plus Jakarta Sans
+Body: Inter
+Buttons: Medium or semibold
+
+Visual rules:
+
+Large white spaces.
+Rounded cards, but not excessively rounded.
+Real team and project photographs.
+Before-and-after comparison blocks.
+Strong contrast and clearly visible buttons.
+Minimal animation.
+Mobile-first layout.
+Consistent icon set.
+Avoid carousels in the hero section.
+Avoid text placed over visually complicated photographs.
+Brand feeling
+
+The design should communicate:
+
+Reliable
+Careful
+Insured
+Punctual
+Transparent
+Professional
+Safe around children and pets
+Homepage architecture
+1. Header
+
+Desktop:
+
+Logo
+Home
+Services
+Prices
+How It Works
+Service Areas
+About Us
+Reviews
+Contact
+[Get a Free Quote]
+
+Mobile:
+
+Logo
+Phone icon
+Menu
+Sticky bottom button: Get a Quote
+
+The telephone number should remain visible, especially on mobile.
+
+2. Hero section
+
+Example:
+
+Professional cleaning without the stress
+
+Reliable home and office cleaning with trained professionals, transparent pricing and flexible appointments.
+
+[Get a Free Quote] [View Services]
+
+Trust indicators immediately beneath the buttons:
+
+✓ Insured cleaning team
+✓ Background-checked professionals
+✓ Eco-friendly products available
+✓ Satisfaction guarantee
+
+Place a real photograph of a uniformed cleaner in a bright, realistic home or office. Do not use a photograph that looks like a medical laboratory unless that is genuinely the company’s positioning.
+
+3. Quick quotation panel
+
+Use four simple fields:
+
+Property type
+Cleaning service
+Approximate size
+Postcode or city
+
+Button:
+
+Calculate Estimate
+
+Do not begin with a fifteen-field form. Capture the basic intent first and collect details on the next step.
+
+4. Services section
+
+Use cards for:
+
+Regular home cleaning
+Deep cleaning
+End-of-tenancy cleaning
+Office cleaning
+Airbnb and short-term rental cleaning
+Post-construction cleaning
+Window cleaning
+Carpet and upholstery cleaning
+
+Each service card should contain:
+
+Service name
+One-sentence result
+Starting price or “Custom quotation”
+Typical duration
+View details button
+5. Why choose us
+
+Focus on measurable proof:
+
+Trained and vetted cleaners
+Fully insured work
+Clear arrival windows
+Professional equipment
+Transparent quotations
+Quality-control checklist
+Responsive customer support
+Re-cleaning policy
+
+Avoid meaningless phrases such as “We are the best cleaning company.”
+
+6. How it works
+
+A three- or four-step process:
+
+1. Select your service
+2. Receive your quotation
+3. Confirm the appointment
+4. Inspect and enjoy the result
+7. Before-and-after section
+
+This is one of the strongest conversion sections for a cleaning business.
+
+Organize it by category:
+
+Kitchen
+Bathroom
+Windows
+Office
+Post-construction
+Carpet
+
+Only use real projects or clearly licensed images.
+
+8. Pricing preview
+
+Example:
+
+Service	Pricing model	Suitable for
+Regular cleaning	From an hourly or room-based rate	Weekly and biweekly customers
+Deep cleaning	Property quotation	First-time or seasonal cleaning
+Office cleaning	Monthly contract	Commercial customers
+End-of-tenancy	Fixed quotation	Tenants and landlords
+Windows	Per window or square metre	Homes and offices
+
+Do not present false precision. A price such as €127.43 looks automated but may be commercially unreliable.
+
+9. Customer reviews
+
+Each review should ideally include:
+
+Customer name
+General location
+Service purchased
+Review
+Review date
+Verified platform source
+
+Use only genuine reviews.
+
+10. Service-area section
+
+Show:
+
+Cities
+Neighbourhoods
+Postcodes
+Travel fees, when applicable
+Areas not currently covered
+
+This also supports local search visibility.
+
+11. Guarantee section
+
+Example:
+
+Not completely satisfied?
+
+Contact us within 24 hours and we will review the issue under our satisfaction policy.
+
+The exact policy must match what the company is genuinely willing to provide.
+
+12. Final conversion section
+
+Tell us what needs cleaning. We will send you a clear quotation and available appointment options.
+
+Buttons:
+
+Request a Quote
+Call Now
+Message on WhatsApp/Viber
+13. Footer
+
+Include:
+
+Company name
+Business registration details
+Telephone
+Email
+Opening hours
+Service locations
+Privacy policy
+Cookie policy
+Terms and conditions
+Cancellation policy
+Satisfaction policy
+Social profiles
+Page structure
+/
+├── /services
+│   ├── /regular-home-cleaning
+│   ├── /deep-cleaning
+│   ├── /office-cleaning
+│   ├── /end-of-tenancy-cleaning
+│   ├── /airbnb-cleaning
+│   ├── /post-construction-cleaning
+│   ├── /window-cleaning
+│   └── /carpet-upholstery-cleaning
+│
+├── /prices
+├── /get-a-quote
+├── /book
+├── /how-it-works
+├── /service-areas
+│   ├── /city-name
+│   └── /neighbourhood-name
+│
+├── /about
+├── /reviews
+├── /before-after
+├── /commercial-cleaning
+├── /faq
+├── /blog
+├── /contact
+│
+├── /privacy
+├── /cookies
+├── /terms
+├── /cancellation-policy
+└── /satisfaction-guarantee
+
+Each major cleaning service needs its own page. One general “Services” page is not enough for professional presentation, advertising campaigns, or local search.
+
+Service-page template
+
+Every service page should follow approximately the same structure:
+
+1. Service-specific hero
+2. Main benefits
+3. What is included
+4. What is not included
+5. Optional extras
+6. Cleaning checklist
+7. Estimated duration
+8. Pricing method
+9. Preparation instructions
+10. Before-and-after examples
+11. Related reviews
+12. Frequently asked questions
+13. Quote form
+
+Example cleaning checklist:
+
+Kitchen
+- Worktops
+- Sink and taps
+- Cabinet exteriors
+- Appliance exteriors
+- Hob
+- Floor
+- Bins
+
+Bathroom
+- Shower or bath
+- Toilet
+- Sink and taps
+- Mirrors
+- Tiles
+- Floor
+- Fixtures
+
+This level of specificity reduces disputes.
+
+Quotation and booking system
+Step 1: Service
+Home
+Office
+Airbnb
+End of tenancy
+After-build cleaning
+Windows
+Carpet and upholstery
+Step 2: Property
+Property type
+Number of bedrooms
+Number of bathrooms
+Approximate area
+Number of floors
+Occupied or empty
+Step 3: Condition and extras
+Standard / heavily soiled
+Pets
+Oven cleaning
+Fridge cleaning
+Inside cabinets
+Interior windows
+Carpets
+Upholstery
+Balcony
+Step 4: Location
+Address
+Postcode
+Parking availability
+Floor
+Lift availability
+Access instructions
+Step 5: Schedule
+Preferred date
+Alternative date
+Preferred time window
+One-time or recurring
+Step 6: Customer
+Name
+Telephone
+Email
+Preferred contact method
+Additional information
+Photo upload
+Consent checkbox
+Step 7: Confirmation
+Request summary
+Estimated price range
+What happens next
+Reference number
+
+For the first version, make this a quotation request, not an automatically confirmed appointment. Automatic booking becomes risky unless staff schedules, travel time, service duration, holidays, and cancellations are correctly managed.
+
+Technical architecture
+Recommended MVP
+Browser
+   ↓
+Next.js application
+   ├── Public website
+   ├── Service pages
+   ├── Quote calculator
+   ├── Contact forms
+   ├── API routes / server actions
+   └── Basic admin protection
+          ↓
+Supabase PostgreSQL
+          ↓
+Email notification service
+
+This is a modular monolith: one project, one deployment, one codebase.
+
+That is superior to creating separate frontend and backend repositories at this stage. A dedicated NestJS backend would add deployment, authentication, API, validation, CORS, monitoring, and maintenance complexity without generating immediate business value.
+
+Suggested project structure
+src/
+├── app/
+│   ├── page.tsx
+│   ├── layout.tsx
+│   ├── services/
+│   │   ├── page.tsx
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── prices/
+│   ├── get-a-quote/
+│   ├── book/
+│   ├── service-areas/
+│   ├── about/
+│   ├── reviews/
+│   ├── before-after/
+│   ├── faq/
+│   ├── blog/
+│   ├── contact/
+│   ├── privacy/
+│   └── api/
+│       ├── quotes/
+│       ├── contact/
+│       └── uploads/
+│
+├── components/
+│   ├── layout/
+│   ├── home/
+│   ├── services/
+│   ├── forms/
+│   ├── booking/
+│   ├── ui/
+│   └── seo/
+│
+├── features/
+│   ├── quotes/
+│   ├── bookings/
+│   ├── pricing/
+│   ├── customers/
+│   └── notifications/
+│
+├── lib/
+│   ├── database/
+│   ├── email/
+│   ├── validation/
+│   ├── seo/
+│   └── utilities/
+│
+├── data/
+│   ├── services.ts
+│   ├── service-areas.ts
+│   ├── faq.ts
+│   └── navigation.ts
+│
+└── types/
+    ├── quote.ts
+    ├── booking.ts
+    └── service.ts
+Database model
+
+A practical initial database could contain:
+
+customers
+- id
+- name
+- email
+- phone
+- preferred_contact_method
+- created_at
+
+quote_requests
+- id
+- customer_id
+- service_id
+- property_type
+- area
+- bedrooms
+- bathrooms
+- condition
+- postcode
+- estimated_price_min
+- estimated_price_max
+- status
+- notes
+- created_at
+
+quote_extras
+- quote_id
+- extra_service_id
+- quantity
+
+bookings
+- id
+- customer_id
+- quote_id
+- start_time
+- estimated_duration
+- address
+- status
+- final_price
+- payment_status
+
+services
+- id
+- name
+- slug
+- description
+- pricing_method
+- active
+
+service_extras
+- id
+- name
+- pricing_method
+- price
+- active
+
+service_areas
+- id
+- name
+- postcode
+- travel_fee
+- active
+
+uploads
+- id
+- quote_id
+- file_url
+- file_type
+- created_at
+
+reviews
+- id
+- customer_name
+- service_id
+- rating
+- content
+- approved
+- created_at
+
+Do not add customer accounts in version one unless customers genuinely need to manage multiple bookings. Password recovery, account security and personal-data administration create additional work.
+
+Admin dashboard
+
+A private internal dashboard should eventually provide:
+
+New quotation requests
+Quotation status
+Customer records
+Calendar and bookings
+Service management
+Pricing rules
+Service-area management
+Review moderation
+Photo management
+Email templates
+Cancellation records
+Payment status
+Basic analytics
+
+Quotation statuses:
+
+New
+Contacted
+Inspection required
+Quotation sent
+Accepted
+Rejected
+Booked
+Completed
+Cancelled
+SEO and customer acquisition architecture
+
+Create a dedicated page for every important combination of service and genuine operating area.
+
+Examples:
+
+/deep-cleaning/sofia
+/office-cleaning/sofia
+/end-of-tenancy-cleaning/plovdiv
+/window-cleaning/pernik
+
+Do not generate hundreds of nearly identical pages by changing only the city name. Each page needs real information about coverage, response times, pricing conditions, projects, and testimonials.
+
+Include:
+
+Descriptive page titles.
+Unique service descriptions.
+Local service-area content.
+Structured business and service information.
+Fast-loading images.
+Descriptive image alternative text.
+XML sitemap.
+Robots configuration.
+Canonical URLs.
+Open Graph images.
+Google Business Profile integration.
+Trackable call and quotation buttons.
+Development phases
+Phase 1: Lead-generation MVP
+
+Build:
+
+Homepage
+Service pages
+About page
+Service areas
+Reviews
+FAQ
+Contact page
+Quotation form
+Email notifications
+SEO foundations
+Analytics
+
+No accounts, online payment, or complicated scheduling.
+
+Phase 2: Operational system
+
+Add:
+
+Database
+Admin dashboard
+Quotation statuses
+Price estimator
+Image uploads
+Appointment requests
+Automated confirmation emails
+Phase 3: Customer booking
+
+Add:
+
+Real staff availability
+Booking calendar
+Deposits and payments
+Recurring appointments
+Cancellation workflow
+Customer portal
+Invoices
+Phase 4: Business automation
+
+Add:
+
+Cleaner assignments
+Route planning
+Automated reminders
+Recurring-service management
+Quality-control reports
+Cleaner check-in/check-out
+Customer feedback automation
+Revenue reporting
