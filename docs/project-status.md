@@ -37,6 +37,9 @@
   - homepage core sections
   - quote page and contact page
   - about, prices, how-it-works, reviews, and commercial-cleaning pages
+- Integrated the provided local art assets:
+  - ambient background graphics from `background_image/` as masked site-wide background treatment
+  - hero imagery from `hero_image/` with one primary homepage hero image and one later supporting trust section image
 - Added SEO foundations:
   - route metadata
   - `robots.ts`

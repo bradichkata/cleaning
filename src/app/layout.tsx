@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCompanyContent, company } from "@/data/company";
+import { DecorativeBackgrounds } from "@/components/layout/decorative-backgrounds";
 import { MobileQuoteBar } from "@/components/layout/mobile-quote-bar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -55,6 +56,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <div className="relative flex min-h-screen flex-col overflow-x-hidden">
+          <DecorativeBackgrounds />
           <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[radial-gradient(circle_at_top_right,_rgba(28,181,163,0.18),_transparent_45%),linear-gradient(180deg,_rgba(16,42,67,0.04),_transparent_65%)]" />
           <div className="pointer-events-none absolute inset-x-0 top-[30rem] -z-10 h-[28rem] bg-[radial-gradient(circle_at_top_left,_rgba(233,162,59,0.12),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(16,42,67,0.08),_transparent_40%)]" />
           <SiteHeader locale={locale} companyContent={companyContent} />

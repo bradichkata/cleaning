@@ -1,14 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Sparkles } from "lucide-react";
 import { AreaCard } from "@/components/blocks/area-card";
 import { CtaBanner } from "@/components/blocks/cta-banner";
 import { FaqList } from "@/components/blocks/faq-list";
 import { ReviewSlotCard } from "@/components/blocks/review-slot-card";
 import { ServiceCard } from "@/components/blocks/service-card";
+import { HeroVisual } from "@/components/home/hero-visual";
 import { buttonClasses } from "@/components/ui/button";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { beforeAfterStories } from "@/data/before-after";
+import { heroImages } from "@/data/media";
 import {
   company,
   getCompanyContent,
@@ -50,7 +53,7 @@ export default async function Home() {
       />
 
       <section className="section-space pb-10 pt-10 sm:pt-16">
-        <div className="shell grid gap-10 lg:grid-cols-[minmax(0,1.12fr)_25rem] lg:items-center">
+        <div className="shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,39rem)] lg:items-center">
           <div>
             <span className="eyebrow">{isBg ? "MVP за запитвания" : "Lead-generation MVP"}</span>
             <h1 className="mt-6 max-w-5xl text-5xl leading-[0.96] font-bold text-navy sm:text-6xl xl:text-7xl">
@@ -99,91 +102,103 @@ export default async function Home() {
                 </div>
               ))}
             </div>
+
+            <div className="mt-10 max-w-3xl">
+              <div className="surface-card rounded-[2rem] p-6 sm:p-8">
+                <div className="flex items-center gap-3 text-sm font-semibold text-navy">
+                  <Sparkles className="h-4 w-4 text-turquoise" />
+                  {isBg ? "Бърз ориентир" : "Quick estimate panel"}
+                </div>
+                <h2 className="mt-5 text-3xl font-bold text-navy">
+                  {isBg ? "Започнете с четири лесни детайла." : "Start with four simple details."}
+                </h2>
+                <p className="mt-3 text-base leading-7 text-muted">
+                  {isBg
+                    ? "Това ви изпраща към пълната форма с вече попълнени основи. Без стена от петнадесет полета още в началото."
+                    : "This sends you into the full quote flow with the basics already in place. No fifteen-field wall up front."}
+                </p>
+
+                <form action="/get-a-quote" className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-service">
+                      {isBg ? "Услуга" : "Cleaning service"}
+                    </label>
+                    <select
+                      id="home-service"
+                      className="input-field"
+                      name="serviceSlug"
+                      defaultValue="regular-home-cleaning"
+                    >
+                      {services.map((service) => (
+                        <option key={service.slug} value={service.slug}>
+                          {service.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-type">
+                      {isBg ? "Тип имот" : "Property type"}
+                    </label>
+                    <select
+                      id="home-type"
+                      className="input-field"
+                      name="propertyType"
+                      defaultValue="apartment"
+                    >
+                      <option value="apartment">{isBg ? "Апартамент" : "Apartment"}</option>
+                      <option value="house">{isBg ? "Къща" : "House"}</option>
+                      <option value="office">{isBg ? "Офис" : "Office suite"}</option>
+                      <option value="rental">{isBg ? "Наем / Airbnb" : "Rental / Airbnb"}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-size">
+                      {isBg ? "Приблизителен размер" : "Approximate size"}
+                    </label>
+                    <select
+                      id="home-size"
+                      className="input-field"
+                      name="size"
+                      defaultValue="medium"
+                    >
+                      <option value="compact">{isBg ? "Компактен" : "Compact"}</option>
+                      <option value="medium">{isBg ? "Среден" : "Medium"}</option>
+                      <option value="large">{isBg ? "Голям" : "Large"}</option>
+                      <option value="oversized">{isBg ? "Много голям" : "Oversized"}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-postcode">
+                      {isBg ? "Пощенски код или град" : "Postcode or city"}
+                    </label>
+                    <input
+                      id="home-postcode"
+                      className="input-field"
+                      name="postcode"
+                      placeholder={isBg ? "напр. 1000 или София" : "e.g. 1000 or Sofia"}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className={buttonClasses({
+                      tone: "primary",
+                      fullWidth: true,
+                      size: "lg",
+                      className: "sm:col-span-2",
+                    })}
+                  >
+                    {isBg ? "Изчисли ориентир" : "Calculate Estimate"}
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
 
-          <aside className="surface-card rounded-[2rem] p-6 sm:p-8">
-            <div className="flex items-center gap-3 text-sm font-semibold text-navy">
-              <Sparkles className="h-4 w-4 text-turquoise" />
-              {isBg ? "Бърз ориентир" : "Quick estimate panel"}
-            </div>
-            <h2 className="mt-5 text-3xl font-bold text-navy">
-              {isBg ? "Започнете с четири лесни детайла." : "Start with four simple details."}
-            </h2>
-            <p className="mt-3 text-base leading-7 text-muted">
-              {isBg
-                ? "Това ви изпраща към пълната форма с вече попълнени основи. Без стена от петнадесет полета още в началото."
-                : "This sends you into the full quote flow with the basics already in place. No fifteen-field wall up front."}
-            </p>
-
-            <form action="/get-a-quote" className="mt-6 grid gap-4">
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-service">
-                  {isBg ? "Услуга" : "Cleaning service"}
-                </label>
-                <select
-                  id="home-service"
-                  className="input-field"
-                  name="serviceSlug"
-                  defaultValue="regular-home-cleaning"
-                >
-                  {services.map((service) => (
-                    <option key={service.slug} value={service.slug}>
-                      {service.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-type">
-                  {isBg ? "Тип имот" : "Property type"}
-                </label>
-                <select
-                  id="home-type"
-                  className="input-field"
-                  name="propertyType"
-                  defaultValue="apartment"
-                >
-                  <option value="apartment">{isBg ? "Апартамент" : "Apartment"}</option>
-                  <option value="house">{isBg ? "Къща" : "House"}</option>
-                  <option value="office">{isBg ? "Офис" : "Office suite"}</option>
-                  <option value="rental">{isBg ? "Наем / Airbnb" : "Rental / Airbnb"}</option>
-                </select>
-              </div>
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-size">
-                  {isBg ? "Приблизителен размер" : "Approximate size"}
-                </label>
-                <select
-                  id="home-size"
-                  className="input-field"
-                  name="size"
-                  defaultValue="medium"
-                >
-                  <option value="compact">{isBg ? "Компактен" : "Compact"}</option>
-                  <option value="medium">{isBg ? "Среден" : "Medium"}</option>
-                  <option value="large">{isBg ? "Голям" : "Large"}</option>
-                  <option value="oversized">{isBg ? "Много голям" : "Oversized"}</option>
-                </select>
-              </div>
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-postcode">
-                  {isBg ? "Пощенски код или град" : "Postcode or city"}
-                </label>
-                <input
-                  id="home-postcode"
-                  className="input-field"
-                  name="postcode"
-                  placeholder={isBg ? "напр. 1000 или София" : "e.g. 1000 or Sofia"}
-                />
-              </div>
-              <button
-                type="submit"
-                className={buttonClasses({ tone: "primary", fullWidth: true, size: "lg" })}
-              >
-                {isBg ? "Изчисли ориентир" : "Calculate Estimate"}
-              </button>
-            </form>
-          </aside>
+          <div className="relative">
+            <div className="absolute left-3 top-0 hidden h-20 w-20 rounded-full border border-[rgba(28,181,163,0.2)] bg-white/55 blur-sm lg:block" />
+            <HeroVisual locale={locale} />
+          </div>
         </div>
       </section>
 
@@ -241,6 +256,43 @@ export default async function Home() {
                 <p className="mt-4 text-base leading-7 text-muted">{reason}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-space pt-0">
+        <div className="shell">
+          <div className="overflow-hidden rounded-[2rem] border border-[rgba(16,42,67,0.08)] bg-white shadow-[0_32px_80px_rgba(16,42,67,0.08)]">
+            <div className="grid gap-0 lg:grid-cols-[1.15fr_minmax(0,0.85fr)]">
+              <div className="relative min-h-[22rem]">
+                <Image
+                  src={heroImages.office}
+                  alt={
+                    isBg
+                      ? "Светъл и подреден офис, подготвен за професионално почистване"
+                      : "Bright and orderly office prepared for professional cleaning"
+                  }
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(16,42,67,0.06),_rgba(16,42,67,0.02))]" />
+              </div>
+              <div className="flex flex-col justify-center p-8 sm:p-10">
+                <span className="eyebrow">
+                  {isBg ? "Видим стандарт" : "Visible standards"}
+                </span>
+                <h2 className="mt-5 text-3xl font-bold text-navy sm:text-4xl">
+                  {isBg
+                    ? "Подреденото пространство създава доверие още от първия поглед."
+                    : "An orderly space creates trust at first glance."}
+                </h2>
+                <p className="mt-4 text-base leading-8 text-muted">
+                  {isBg
+                    ? "Светлите работни места, чистите повърхности и подреденото излъчване подсилват усещането за грижа и готовност, което клиентите очакват."
+                    : "Bright work areas, clean surfaces, and an orderly presentation reinforce the standard of care clients expect."}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
