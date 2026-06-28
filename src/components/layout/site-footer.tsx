@@ -19,8 +19,8 @@ export function SiteFooter({
   return (
     <footer className="border-t border-[rgba(16,42,67,0.08)] bg-navy text-white">
       <div className="shell py-14">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_repeat(4,minmax(0,1fr))]">
-          <div className="max-w-sm">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.2fr_repeat(4,minmax(0,1fr))]">
+          <div className="max-w-sm md:col-span-2 lg:col-span-1">
             <div className="font-display text-2xl font-bold">{company.brandName}</div>
             <p className="mt-4 text-sm leading-7 text-white/72">
               {companyContent.description}

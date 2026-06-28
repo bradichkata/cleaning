@@ -34,7 +34,7 @@ export default async function CommercialCleaningPage() {
         }
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div className="shell grid gap-6 md:grid-cols-[minmax(0,1fr)_22rem]">
           <div className="grid gap-5 md:grid-cols-2">
             {commercialCapabilities.map((item) => (
               <article key={item} className="panel rounded-[1.5rem] p-6">

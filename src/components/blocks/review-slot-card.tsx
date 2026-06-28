@@ -3,7 +3,7 @@ import type { ReviewSlot } from "@/types/content";
 export function ReviewSlotCard({ review }: { review: ReviewSlot }) {
   return (
     <article className="panel rounded-[1.75rem] p-6">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
         <span className="eyebrow">Verified review slot</span>
         <span className="text-sm text-muted">{review.source}</span>
       </div>

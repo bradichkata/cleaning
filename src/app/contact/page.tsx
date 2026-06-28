@@ -44,7 +44,7 @@ async function ContactPageContent({
         }
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
+        <div className="shell grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
           <ContactForm sourcePage="contact-page" locale={locale} />
           <aside className="surface-card rounded-[1.75rem] p-6">
             <h2 className="text-2xl font-bold text-navy">

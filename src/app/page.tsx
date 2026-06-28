@@ -56,7 +56,7 @@ export default async function Home() {
         <div className="shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,39rem)] lg:items-center">
           <div>
             <span className="eyebrow">{isBg ? "MVP за запитвания" : "Lead-generation MVP"}</span>
-            <h1 className="mt-6 max-w-5xl text-5xl leading-[0.96] font-bold text-navy sm:text-6xl xl:text-7xl">
+            <h1 className="mt-6 max-w-5xl text-4xl leading-[0.96] font-bold text-navy sm:text-5xl lg:text-6xl xl:text-7xl">
               {isBg
                 ? "Професионално почистване без излишен стрес."
                 : "Professional cleaning without the stress."}
@@ -217,7 +217,7 @@ export default async function Home() {
                 : "Each major cleaning type has its own structure, pricing logic, and service page so visitors can understand fit before they contact you."
             }
           />
-          <div className="mt-10 grid gap-6 xl:grid-cols-2">
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
             {featuredServices.map((service) => (
               <ServiceCard key={service.slug} service={service} />
             ))}
@@ -312,7 +312,7 @@ export default async function Home() {
                 : "The path is simple: choose the service, get a realistic estimate, confirm the appointment manually, and inspect the result against a defined scope."
             }
           />
-          <div className="mt-10 grid gap-5 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {processSteps.map((step, index) => (
               <article key={step.title} className="panel rounded-[1.75rem] p-6">
                 <div className="text-sm font-semibold text-turquoise">
@@ -341,7 +341,7 @@ export default async function Home() {
                 : "This build keeps the structure honest: the layout is ready for real project photography and case-study notes without faking stock-image proof."
             }
           />
-          <div className="mt-10 grid gap-6 xl:grid-cols-3">
+          <div className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
             {beforeAfterStories.map((story) => (
               <article key={story.title} className="panel overflow-hidden rounded-[1.75rem]">
                 <div className="grid grid-cols-2">
@@ -422,7 +422,7 @@ export default async function Home() {
                 : "Because real reviews were not provided yet, the site keeps the testimonial layout ready without inventing names, dates, or platform proof."
             }
           />
-          <div className="mt-10 grid gap-6 xl:grid-cols-3">
+          <div className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
             {reviewSlots.map((review) => (
               <ReviewSlotCard key={review.title} review={review} />
             ))}
@@ -445,7 +445,7 @@ export default async function Home() {
                 : "Each area page is ready for real local notes, access details, and service emphasis. Fewer credible pages will outperform hundreds of empty city swaps."
             }
           />
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {serviceAreas.map((area) => (
               <AreaCard key={area.slug} area={area} />
             ))}

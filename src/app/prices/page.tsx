@@ -35,26 +35,28 @@ export default async function PricesPage() {
         }
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 lg:grid-cols-[minmax(0,1fr)_21rem]">
-          <div className="overflow-hidden rounded-[1.75rem] border border-[rgba(16,42,67,0.08)] bg-white shadow-[0_28px_70px_rgba(16,42,67,0.08)]">
-            <div className="grid grid-cols-[1.3fr_1fr_1fr] gap-4 border-b border-[rgba(16,42,67,0.06)] px-6 py-4 text-sm font-semibold text-navy">
-              <div>{isBg ? "Услуга" : "Service"}</div>
-              <div>{isBg ? "Модел на ценообразуване" : "Pricing model"}</div>
-              <div>{isBg ? "Подходящо за" : "Suitable for"}</div>
-            </div>
-            {services.map((service) => (
-              <div
-                key={service.slug}
-                className="grid grid-cols-[1.3fr_1fr_1fr] gap-4 px-6 py-4 text-sm text-muted odd:bg-[rgba(16,42,67,0.02)]"
-              >
-                <div>
-                  <div className="font-semibold text-navy">{service.name}</div>
-                  <div className="mt-1">{service.durationLabel}</div>
-                </div>
-                <div>{service.pricingLabel}</div>
-                <div>{service.audience}</div>
+        <div className="shell grid gap-6 md:grid-cols-[minmax(0,1fr)_21rem]">
+          <div className="overflow-x-auto rounded-[1.75rem] border border-[rgba(16,42,67,0.08)] bg-white shadow-[0_28px_70px_rgba(16,42,67,0.08)]">
+            <div className="min-w-[38rem]">
+              <div className="grid grid-cols-[1.3fr_1fr_1fr] gap-4 border-b border-[rgba(16,42,67,0.06)] px-6 py-4 text-sm font-semibold text-navy">
+                <div>{isBg ? "Услуга" : "Service"}</div>
+                <div>{isBg ? "Модел на ценообразуване" : "Pricing model"}</div>
+                <div>{isBg ? "Подходящо за" : "Suitable for"}</div>
               </div>
-            ))}
+              {services.map((service) => (
+                <div
+                  key={service.slug}
+                  className="grid grid-cols-[1.3fr_1fr_1fr] gap-4 px-6 py-4 text-sm text-muted odd:bg-[rgba(16,42,67,0.02)]"
+                >
+                  <div>
+                    <div className="font-semibold text-navy">{service.name}</div>
+                    <div className="mt-1">{service.durationLabel}</div>
+                  </div>
+                  <div>{service.pricingLabel}</div>
+                  <div>{service.audience}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <aside className="surface-card rounded-[1.75rem] p-6">

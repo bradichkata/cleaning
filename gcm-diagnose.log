@@ -1,0 +1,192 @@
+﻿Diagnose log at 2026-06-25T17:10:37Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.7.3+5fa7116896c82164996a609accd1c5ad90fe730a
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26200)
+Reading environment variables... OK
+ Variables:
+OneDriveConsumer=C:\Users\vilie\Downloads\OneDrive
+ProgramFiles(x86)=C:\Program Files (x86)
+MSYSTEM=MINGW64
+ProgramW6432=C:\Program Files
+windir=C:\WINDOWS
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD
+ACSetupSvcPort=23210
+TMP=C:\Users\vilie\AppData\Local\Temp
+CODEX_INTERNAL_ORIGINATOR_OVERRIDE=codex_vscode
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+PUBLIC=C:\Users\Public
+RUST_LOG=warn
+VSCODE_CWD=C:\Users\vilie\AppData\Local\Programs\Microsoft VS Code
+EnableLog=INFO
+PROCESSOR_REVISION=0802
+TEMP=C:\Users\vilie\AppData\Local\Temp
+USERPROFILE=C:\Users\vilie
+LOGONSERVER=\\USER11474
+TERM=xterm-256color
+USERNAME=user11474
+SystemRoot=C:\WINDOWS
+CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_11348_AHGATGCHYLYLHQUU
+CODEX_THREAD_ID=019effb4-dcd3-7dc1-b3f7-3fd66b51368d
+PLINK_PROTOCOL=ssh
+PATH=C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\vilie\bin;C:\Users\vilie\.codex\tmp\arg0\codex-arg0zY1sZm;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\vilie\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\vilie\AppData\Local\Programs\Python\Python311\;C:\Users\vilie\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\vilie\AppData\Local\Programs\Python\Python310\;C:\Users\vilie\AppData\Local\Microsoft\WindowsApps;C:\Users\vilie\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\vilie\AppData\Local\Microsoft\WinGet\Packages\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe;D:\MusicGen\the_power_of_universe\tools\ffmpeg\ffmpeg-8.1.1-full_build\bin;C:\Users\vilie\AppData\Roaming\npm;c:\Users\vilie\.vscode\extensions\openai.chatgpt-26.616.81150-win32-x64\bin\windows-x86_64
+OneDrive=C:\Users\vilie\Downloads\OneDrive
+PROCESSOR_ARCHITECTURE=AMD64
+CommonProgramFiles=C:\Program Files\Common Files
+EFC_1840_1592913036=1
+ProgramData=C:\ProgramData
+LC_CTYPE=C.UTF-8
+RlsSvcPort=22112
+HOMEPATH=\Users\vilie
+COMPUTERNAME=USER11474
+VSCODE_NLS_CONFIG={"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"C:\\Users\\vilie\\AppData\\Local\\Programs\\Microsoft VS Code\\7e7950df89\\resources\\app\\out\\nls.messages.json","locale":"en-us","availableLanguages":{}}
+VSCODE_HANDLES_UNCAUGHT_ERRORS=true
+ALLUSERSPROFILE=C:\ProgramData
+EFC_1840_4126798990=1
+VSCODE_ESM_ENTRYPOINT=vs/workbench/api/node/extensionHostProcess
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+SESSIONNAME=Console
+DriverData=C:\Windows\System32\Drivers\DriverData
+HOMEDRIVE=C:
+VSCODE_PID=11348
+VSCODE_CRASH_REPORTER_PROCESS_TYPE=extensionHost
+GIT_TRACE2_PARENT_SID=8b98e51f-6255-4ebd-a7e3-53d97f15712f
+SystemDrive=C:
+NUMBER_OF_PROCESSORS=16
+OS=Windows_NT
+ProgramFiles=C:\Program Files
+ComSpec=C:\WINDOWS\system32\cmd.exe
+USERDOMAIN_ROAMINGPROFILE=USER11474
+HOME=C:\Users\vilie
+VSCODE_IPC_HOOK=\\.\pipe\45ddcd60-1.126.0-main-sock
+ELECTRON_RUN_AS_NODE=1
+PSModulePath=C:\Users\vilie\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+TMPDIR=C:\Users\vilie\AppData\Local\Temp
+APPDATA=C:\Users\vilie\AppData\Roaming
+USERDOMAIN=USER11474
+ACSvcPort=17532
+LOCALAPPDATA=C:\Users\vilie\AppData\Local
+DEBUG=release
+CommonProgramW6432=C:\Program Files\Common Files
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+COLORTERM=truecolor
+VSCODE_CODE_CACHE_PATH=C:\Users\vilie\AppData\Roaming\Code\CachedData\7e7950df89d055b5a378379db9ee14290772148a
+PROCESSOR_LEVEL=23
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\vilie\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\vilie\AppData\Local\Temp\fbdb4bc9bff3af0c1c58de55'... OK
+Reading from temporary file 'C:\Users\vilie\AppData\Local\Temp\fbdb4bc9bff3af0c1c58de55'... OK
+Deleting temporary file 'C:\Users\vilie\AppData\Local\Temp\fbdb4bc9bff3af0c1c58de55'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\vilie
+UserDataDirectoryPath: C:\Users\vilie\.gcm
+GetCurrentDirectory(): D:\web_app
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:65107/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.54.0.windows.1'
+Locating current repository...Git repository at 'D:/web_app/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	remote.origin.url=https://github.com/bradichkata/cleaning.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	user.name=bradichkata
+file:.git/config	user.email=bradichkata@users.noreply.github.com
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\vilie\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\vilie\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+

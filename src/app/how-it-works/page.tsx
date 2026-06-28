@@ -32,7 +32,7 @@ export default async function HowItWorksPage() {
         }
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 lg:grid-cols-4">
+        <div className="shell grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {processSteps.map((step, index) => (
             <article key={step.title} className="panel rounded-[1.75rem] p-6">
               <div className="text-sm font-semibold text-turquoise">

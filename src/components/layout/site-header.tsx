@@ -35,7 +35,7 @@ export function SiteHeader({
             <div className="font-display text-base font-bold text-navy">
               {company.brandName}
             </div>
-            <div className="text-sm text-muted">{companyContent.tagline}</div>
+            <div className="hidden text-sm text-muted sm:block">{companyContent.tagline}</div>
           </div>
         </Link>
 

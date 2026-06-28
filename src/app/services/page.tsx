@@ -21,7 +21,7 @@ export default function ServicesPage() {
         description="That keeps the site professional for real customers, clearer for advertising campaigns, and stronger for search intent than a single generic services page."
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 xl:grid-cols-2">
+        <div className="shell grid gap-6 lg:grid-cols-2">
           {services.map((service) => (
             <ServiceCard key={service.slug} service={service} />
           ))}

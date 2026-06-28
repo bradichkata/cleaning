@@ -21,7 +21,7 @@ export default function ServiceAreasPage() {
         description="Each area page is ready for genuine coverage notes, timing expectations, and service emphasis. That gives you stronger local SEO without bloating the site with empty duplicates."
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 lg:grid-cols-3">
+        <div className="shell grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {serviceAreas.map((area) => (
             <AreaCard key={area.slug} area={area} />
           ))}

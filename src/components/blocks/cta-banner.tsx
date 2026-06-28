@@ -11,17 +11,17 @@ export function CtaBanner({ locale = "en" }: { locale?: Locale }) {
     <section className="section-space pt-0">
       <div className="shell">
         <div className="overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,_#102A43,_#163C5B)] px-6 py-10 text-white shadow-[0_32px_80px_rgba(16,42,67,0.28)] sm:px-10">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
             <div>
               <span className="eyebrow border-white/20 bg-white/10 text-white">
                 {isBg ? "Финален CTA" : "Final conversion"}
               </span>
-              <h2 className="mt-5 max-w-2xl text-3xl leading-tight font-bold sm:text-4xl">
+              <h2 className="mt-5 max-w-2xl text-2xl leading-tight font-bold sm:text-3xl">
                 {isBg
                   ? "Кажете ни какво трябва да се почисти. Ще отговорим с ясна оферта и следваща практична стъпка."
                   : "Tell us what needs cleaning. We will respond with a clear quote and the next practical step."}
               </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-white/78">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/78 sm:text-base">
                 {isBg
                   ? "Използвайте структурираната форма за оферта, когато ви трябва ценови ориентир, или се обадете директно при спешен срок."
                   : "Use the structured quote form when you want pricing context, or call directly when timing is urgent."}

@@ -34,7 +34,7 @@ export default async function ReviewsPage() {
         }
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 xl:grid-cols-3">
+        <div className="shell grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
           {reviewSlots.map((review) => (
             <ReviewSlotCard key={review.title} review={review} />
           ))}

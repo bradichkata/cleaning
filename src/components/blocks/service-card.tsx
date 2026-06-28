@@ -5,9 +5,9 @@ import type { Service } from "@/types/content";
 export function ServiceCard({ service }: { service: Service }) {
   return (
     <article className="panel rounded-[1.75rem] p-6 transition duration-200 hover:-translate-y-1">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <span className="eyebrow">{service.heroTag}</span>
-        <div className="text-right text-sm text-muted">
+        <div className="text-sm text-muted sm:text-right">
           <div>{service.pricingLabel}</div>
           <div>{service.durationLabel}</div>
         </div>

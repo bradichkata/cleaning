@@ -19,7 +19,7 @@ export default function BeforeAfterPage() {
         description="These cards are structured for real projects and real notes. Replace the placeholders with licensed or owned before-and-after photography before launch."
       />
       <section className="section-space pt-0">
-        <div className="shell grid gap-6 xl:grid-cols-3">
+        <div className="shell grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
           {beforeAfterStories.map((story) => (
             <article key={story.title} className="panel overflow-hidden rounded-[1.75rem]">
               <div className="grid grid-cols-2">
