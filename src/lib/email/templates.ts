@@ -1,10 +1,34 @@
 import { getServiceBySlug } from "@/data/services";
+import { formatEstimateRange } from "@/lib/utils";
 import type { ContactRequestRecord } from "@/types/contact";
 import type { QuoteRequestRecord } from "@/types/quote";
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function formatMessageHtml(value: string) {
+  return escapeHtml(value).replaceAll("\n", "<br />");
+}
+
+function renderRow(label: string, value: string) {
+  return `<p><strong>${label}:</strong> ${value}</p>`;
+}
 
 export function buildQuoteNotification(record: QuoteRequestRecord) {
   const service = getServiceBySlug(record.serviceSlug);
   const subject = `New quote request: ${service?.name ?? record.serviceSlug} (${record.referenceCode})`;
+  const estimateText =
+    record.estimatedPriceMin !== null && record.estimatedPriceMax !== null
+      ? formatEstimateRange(record.estimatedPriceMin, record.estimatedPriceMax)
+      : "Scope review required";
+  const extrasText = record.extras.length ? record.extras.join(", ") : "None";
+  const messageText = record.message || "No additional notes";
 
   const text = [
     `Reference: ${record.referenceCode}`,
@@ -14,25 +38,32 @@ export function buildQuoteNotification(record: QuoteRequestRecord) {
     `Phone: ${record.phone}`,
     `Property: ${record.propertyType}, ${record.size}, ${record.condition}`,
     `Location: ${record.addressLine}, ${record.city}, ${record.postcode}`,
-    `Estimate: ${record.estimatedPriceMin ?? "n/a"} - ${record.estimatedPriceMax ?? "n/a"}`,
-    `Extras: ${record.extras.join(", ") || "None"}`,
+    `Estimate: ${estimateText}`,
+    `Extras: ${extrasText}`,
     `Preferred date: ${record.preferredDate || "Flexible"}`,
     `Time window: ${record.preferredTimeWindow}`,
-    `Message: ${record.message || "No additional notes"}`,
+    `Consent confirmed: ${record.consent ? "Yes" : "No"}`,
+    `Message: ${messageText}`,
   ].join("\n");
 
-  const html = `
-    <h2>New quote request</h2>
-    <p><strong>Reference:</strong> ${record.referenceCode}</p>
-    <p><strong>Service:</strong> ${service?.name ?? record.serviceSlug}</p>
-    <p><strong>Name:</strong> ${record.name}</p>
-    <p><strong>Email:</strong> ${record.email}</p>
-    <p><strong>Phone:</strong> ${record.phone}</p>
-    <p><strong>Location:</strong> ${record.addressLine}, ${record.city}, ${record.postcode}</p>
-    <p><strong>Estimate range:</strong> ${record.estimatedPriceMin ?? "n/a"} - ${record.estimatedPriceMax ?? "n/a"}</p>
-    <p><strong>Extras:</strong> ${record.extras.join(", ") || "None"}</p>
-    <p><strong>Notes:</strong> ${record.message || "No additional notes"}</p>
-  `;
+  const html = [
+    "<h2>New quote request</h2>",
+    renderRow("Reference", escapeHtml(record.referenceCode)),
+    renderRow("Service", escapeHtml(service?.name ?? record.serviceSlug)),
+    renderRow("Name", escapeHtml(record.name)),
+    renderRow("Email", escapeHtml(record.email)),
+    renderRow("Phone", escapeHtml(record.phone)),
+    renderRow(
+      "Location",
+      escapeHtml(`${record.addressLine}, ${record.city}, ${record.postcode}`),
+    ),
+    renderRow("Estimate range", escapeHtml(estimateText)),
+    renderRow("Extras", escapeHtml(extrasText)),
+    renderRow("Preferred date", escapeHtml(record.preferredDate || "Flexible")),
+    renderRow("Time window", escapeHtml(record.preferredTimeWindow)),
+    renderRow("Consent confirmed", record.consent ? "Yes" : "No"),
+    renderRow("Notes", formatMessageHtml(messageText)),
+  ].join("");
 
   return { subject, text, html };
 }
@@ -47,19 +78,21 @@ export function buildContactNotification(record: ContactRequestRecord) {
     `Phone: ${record.phone}`,
     `Preferred contact: ${record.preferredContactMethod}`,
     `Service interest: ${record.serviceInterest}`,
+    `Consent confirmed: ${record.consent ? "Yes" : "No"}`,
     `Message: ${record.message}`,
   ].join("\n");
 
-  const html = `
-    <h2>New contact request</h2>
-    <p><strong>Reference:</strong> ${record.referenceCode}</p>
-    <p><strong>Name:</strong> ${record.name}</p>
-    <p><strong>Email:</strong> ${record.email}</p>
-    <p><strong>Phone:</strong> ${record.phone}</p>
-    <p><strong>Preferred contact:</strong> ${record.preferredContactMethod}</p>
-    <p><strong>Service interest:</strong> ${record.serviceInterest}</p>
-    <p><strong>Message:</strong> ${record.message}</p>
-  `;
+  const html = [
+    "<h2>New contact request</h2>",
+    renderRow("Reference", escapeHtml(record.referenceCode)),
+    renderRow("Name", escapeHtml(record.name)),
+    renderRow("Email", escapeHtml(record.email)),
+    renderRow("Phone", escapeHtml(record.phone)),
+    renderRow("Preferred contact", escapeHtml(record.preferredContactMethod)),
+    renderRow("Service interest", escapeHtml(record.serviceInterest)),
+    renderRow("Consent confirmed", record.consent ? "Yes" : "No"),
+    renderRow("Message", formatMessageHtml(record.message)),
+  ].join("");
 
   return { subject, text, html };
 }

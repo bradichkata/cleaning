@@ -1,12 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useDeferredValue, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { services } from "@/data/services";
 import { submitQuoteRequest } from "@/features/quotes/actions";
 import { calculateQuoteEstimate } from "@/lib/pricing";
 import { formatEstimateRange } from "@/lib/utils";
-import { services } from "@/data/services";
-import { Button } from "@/components/ui/button";
+import type { Locale } from "@/lib/locale";
 import { initialFormActionState } from "@/types/forms";
+import { contactMethodOptions } from "@/types/contact";
 import {
   accessOptions,
   occupiedStatusOptions,
@@ -21,8 +24,6 @@ import {
   type PropertyType,
   type QuoteEstimateDraft,
 } from "@/types/quote";
-import { contactMethodOptions } from "@/types/contact";
-import type { Locale } from "@/lib/locale";
 
 type QuoteFormProps = {
   sourcePage?: string;
@@ -67,7 +68,6 @@ export function QuoteForm({
   quotePromise,
   defaults,
 }: QuoteFormProps) {
-  const isBg = locale === "bg";
   const [state, formAction, pending] = useActionState(
     submitQuoteRequest,
     initialFormActionState,
@@ -105,12 +105,22 @@ export function QuoteForm({
     <form action={formAction} className="grid gap-6">
       <input type="hidden" name="sourcePage" value={sourcePage} />
       <input type="hidden" name="locale" value={locale} />
+      <div className="sr-only" aria-hidden="true">
+        <label htmlFor="quote-company-website">Leave this field empty</label>
+        <input
+          id="quote-company-website"
+          name="companyWebsite"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_19rem]">
-        <div className="panel rounded-[1.75rem] p-6 sm:p-8">
+        <div className="panel rounded-[1.25rem] p-6 sm:p-8">
           <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="serviceSlug">
-                {isBg ? "Услуга" : "Service"}
+                Service
               </label>
               <select
                 id="serviceSlug"
@@ -134,7 +144,7 @@ export function QuoteForm({
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="propertyType">
-                {isBg ? "Тип имот" : "Property type"}
+                Property type
               </label>
               <select
                 id="propertyType"
@@ -158,7 +168,7 @@ export function QuoteForm({
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="size">
-                {isBg ? "Приблизителен размер" : "Approximate size"}
+                Approximate size
               </label>
               <select
                 id="size"
@@ -182,7 +192,7 @@ export function QuoteForm({
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="condition">
-                {isBg ? "Състояние на имота" : "Property condition"}
+                Property condition
               </label>
               <select
                 id="condition"
@@ -206,22 +216,24 @@ export function QuoteForm({
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="bedrooms">
-                {isBg ? "Спални" : "Bedrooms"}
+                Bedrooms
               </label>
               <input id="bedrooms" className="input-field" name="bedrooms" placeholder="e.g. 2" />
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="bathrooms">
-                {isBg ? "Бани" : "Bathrooms"}
+                Bathrooms
               </label>
-              <input id="bathrooms" className="input-field" name="bathrooms" placeholder="e.g. 1.5" />
+              <input
+                id="bathrooms"
+                className="input-field"
+                name="bathrooms"
+                placeholder="e.g. 1.5"
+              />
             </div>
             <div>
-              <label
-                className="mb-2 block text-sm font-semibold text-navy"
-                htmlFor="occupiedStatus"
-              >
-                {isBg ? "Заетост" : "Occupancy"}
+              <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="occupiedStatus">
+                Occupancy
               </label>
               <select
                 id="occupiedStatus"
@@ -238,32 +250,27 @@ export function QuoteForm({
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="floors">
-                {isBg ? "Брой етажи" : "Number of floors"}
+                Number of floors
               </label>
               <input id="floors" className="input-field" name="floors" placeholder="e.g. 1 or 2" />
             </div>
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="addressLine">
-                {isBg ? "Адрес или улица" : "Address or street"}
+                Address or street
               </label>
               <input id="addressLine" className="input-field" name="addressLine" />
               <FieldError error={state.fieldErrors?.addressLine} />
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="city">
-                {isBg ? "Град" : "City"}
+                City
               </label>
-              <input
-                id="city"
-                className="input-field"
-                name="city"
-                defaultValue={defaults?.city}
-              />
+              <input id="city" className="input-field" name="city" defaultValue={defaults?.city} />
               <FieldError error={state.fieldErrors?.city} />
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="postcode">
-                {isBg ? "Пощенски код" : "Postcode"}
+                Postcode
               </label>
               <input
                 id="postcode"
@@ -278,7 +285,7 @@ export function QuoteForm({
                 className="mb-2 block text-sm font-semibold text-navy"
                 htmlFor="parkingAvailability"
               >
-                {isBg ? "Паркиране" : "Parking"}
+                Parking
               </label>
               <select
                 id="parkingAvailability"
@@ -295,7 +302,7 @@ export function QuoteForm({
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="floorAccess">
-                {isBg ? "Достъп до етажа" : "Floor access"}
+                Floor access
               </label>
               <select
                 id="floorAccess"
@@ -312,7 +319,7 @@ export function QuoteForm({
             </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="preferredDate">
-                {isBg ? "Предпочитана дата" : "Preferred date"}
+                Preferred date
               </label>
               <input id="preferredDate" className="input-field" name="preferredDate" type="date" />
             </div>
@@ -321,7 +328,7 @@ export function QuoteForm({
                 className="mb-2 block text-sm font-semibold text-navy"
                 htmlFor="preferredTimeWindow"
               >
-                {isBg ? "Предпочитан часови диапазон" : "Preferred time window"}
+                Preferred time window
               </label>
               <select
                 id="preferredTimeWindow"
@@ -338,7 +345,7 @@ export function QuoteForm({
             </div>
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="recurring">
-                {isBg ? "Честота на посещенията" : "Visit frequency"}
+                Visit frequency
               </label>
               <select
                 id="recurring"
@@ -362,37 +369,28 @@ export function QuoteForm({
           </div>
         </div>
 
-        <aside className="surface-card rounded-[1.75rem] p-6">
-          <span className="eyebrow">{isBg ? "Ориентир за цена" : "Estimate guide"}</span>
+        <aside className="surface-card rounded-[1.25rem] p-6">
+          <span className="eyebrow">Estimate guide</span>
           <h2 className="mt-5 text-2xl font-bold text-navy">
-            {estimate
-              ? formatEstimateRange(estimate.min, estimate.max)
-              : isBg
-                ? "Нужен е преглед на обхвата"
-                : "Scope review required"}
+            {estimate ? formatEstimateRange(estimate.min, estimate.max) : "Scope review required"}
           </h2>
-          <p className="mt-4 text-base leading-7 text-muted">
-            {quotePromise}
-          </p>
-          <div className="mt-6 rounded-[1.25rem] bg-[rgba(16,42,67,0.04)] p-4 text-sm leading-7 text-muted">
-            {isBg
-              ? "Допълнителни услуги, труден достъп, ограничения за паркиране, необичайни материали и по-силно замърсяване могат да променят крайната цена."
-              : "Extras, access friction, parking limits, unusual materials, and heavier soil can all shift the final quote."}
+          <p className="mt-4 text-base leading-7 text-muted">{quotePromise}</p>
+          <div className="mt-6 rounded-[1rem] bg-[rgba(29,55,72,0.04)] p-4 text-sm leading-7 text-muted">
+            Extras, access friction, parking limits, unusual materials, and heavier soil can all
+            shift the final quote.
           </div>
         </aside>
       </div>
 
-      <div className="panel rounded-[1.75rem] p-6 sm:p-8">
+      <div className="panel rounded-[1.25rem] p-6 sm:p-8">
         <div className="grid gap-6 md:grid-cols-2">
           <div className="md:col-span-2">
-            <span className="mb-3 block text-sm font-semibold text-navy">
-              {isBg ? "Допълнителни услуги" : "Optional extras"}
-            </span>
+            <span className="mb-3 block text-sm font-semibold text-navy">Optional extras</span>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {quoteExtraOptions.map((option) => (
                 <label
                   key={option.value}
-                  className="flex items-center gap-3 rounded-2xl border border-[rgba(16,42,67,0.1)] bg-white px-4 py-3 text-sm text-navy"
+                  className="flex items-center gap-3 rounded-[1rem] border border-[rgba(29,55,72,0.1)] bg-white px-4 py-3 text-sm text-navy"
                 >
                   <input
                     type="checkbox"
@@ -414,21 +412,21 @@ export function QuoteForm({
           </div>
           <div>
             <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="quote-name">
-              {isBg ? "Име" : "Name"}
+              Name
             </label>
             <input id="quote-name" className="input-field" name="name" />
             <FieldError error={state.fieldErrors?.name} />
           </div>
           <div>
             <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="quote-phone">
-              {isBg ? "Телефон" : "Phone"}
+              Phone
             </label>
             <input id="quote-phone" className="input-field" name="phone" />
             <FieldError error={state.fieldErrors?.phone} />
           </div>
           <div>
             <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="quote-email">
-              {isBg ? "Имейл" : "Email"}
+              Email
             </label>
             <input id="quote-email" className="input-field" name="email" type="email" />
             <FieldError error={state.fieldErrors?.email} />
@@ -438,7 +436,7 @@ export function QuoteForm({
               className="mb-2 block text-sm font-semibold text-navy"
               htmlFor="preferredContactMethod"
             >
-              {isBg ? "Предпочитан начин за контакт" : "Preferred contact method"}
+              Preferred contact method
             </label>
             <select
               id="preferredContactMethod"
@@ -455,27 +453,32 @@ export function QuoteForm({
           </div>
           <div className="md:col-span-2">
             <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="message">
-              {isBg ? "Допълнителна информация" : "Additional information"}
+              Additional information
             </label>
             <textarea
               id="message"
               className="input-field textarea-field"
               name="message"
-              placeholder={
-                isBg
-                  ? "Кажете ни за достъпа, домашни любимци, паркиране, деликатни повърхности или други особености."
-                  : "Tell us about access, pets, parking, fragile surfaces, or any concerns about the property."
-              }
+              placeholder="Tell us about access, pets, parking, fragile surfaces, or any concerns about the property."
             />
           </div>
           <div className="md:col-span-2">
-            <label className="flex items-start gap-3 rounded-2xl border border-[rgba(16,42,67,0.1)] bg-white px-4 py-4 text-sm leading-6 text-muted">
+            <label className="flex items-start gap-3 rounded-[1rem] border border-[rgba(29,55,72,0.1)] bg-white px-4 py-4 text-sm leading-6 text-muted">
               <input className="mt-1" type="checkbox" name="consent" />
-              {isBg
-                ? "Съгласен/на съм да бъда потърсен/а по тази заявка и разбирам, че тази форма създава запитване за оферта, а не автоматично потвърден час."
-                : "I agree to be contacted about this request and understand this form creates a quote enquiry, not an automatically confirmed appointment."}
+              I agree to be contacted about this request and understand this form creates a quote enquiry, not an automatically confirmed appointment.
             </label>
             <FieldError error={state.fieldErrors?.consent} />
+            <p className="mt-3 fine-print">
+              By sending this form you agree to our{" "}
+              <Link href="/privacy" className="text-navy underline underline-offset-2">
+                Privacy Policy
+              </Link>{" "}
+              and{" "}
+              <Link href="/cookies" className="text-navy underline underline-offset-2">
+                Cookies Policy
+              </Link>
+              .
+            </p>
           </div>
           <input type="hidden" name="utmSource" value="" />
           <input type="hidden" name="utmMedium" value="" />
@@ -484,7 +487,7 @@ export function QuoteForm({
 
         {state.message ? (
           <div
-            className={`mt-5 rounded-2xl px-4 py-3 text-sm ${
+            className={`mt-5 rounded-[1rem] px-4 py-3 text-sm ${
               state.status === "success"
                 ? "bg-[rgba(54,162,105,0.12)] text-[#19613f]"
                 : "bg-[rgba(180,35,24,0.08)] text-[#8a2019]"
@@ -495,20 +498,25 @@ export function QuoteForm({
           </div>
         ) : null}
 
-        <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <p className="fine-print max-w-2xl">
-            {isBg
-              ? "Ориентировъчната цена помага да се очертае обхватът бързо. Крайният график и цена се потвърждават след човешки преглед на достъпа, състоянието и всички специални изисквания."
-              : "The estimate helps frame scope quickly. Final timing and pricing are confirmed after a human review of access, condition, and any special requirements."}
-          </p>
+        <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl space-y-3">
+            <p className="fine-print">
+              The estimate helps frame scope quickly. Final timing and pricing are confirmed after a human review of access, condition, and any special requirements.
+            </p>
+            <p className="fine-print">
+              Read our{" "}
+              <Link href="/privacy" className="text-navy underline underline-offset-2">
+                Privacy Policy
+              </Link>{" "}
+              and{" "}
+              <Link href="/terms" className="text-navy underline underline-offset-2">
+                Terms
+              </Link>{" "}
+              before sending a request.
+            </p>
+          </div>
           <Button type="submit" disabled={pending}>
-            {pending
-              ? isBg
-                ? "Изпращане..."
-                : "Sending request..."
-              : isBg
-                ? "Поискай оферта"
-                : "Request Quote"}
+            {pending ? "Sending request..." : "Request Quote"}
           </Button>
         </div>
       </div>

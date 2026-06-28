@@ -1,24 +1,60 @@
+import { company } from "@/data/company";
 import { pickLocale, type Locale } from "@/lib/locale";
 
-export function getMainNavigation(locale: Locale) {
+export type HeaderNavigationChild = {
+  href: string;
+  label: string;
+};
+
+export type HeaderNavigationItem = {
+  children?: HeaderNavigationChild[];
+  href: string;
+  label: string;
+};
+
+export function getMainNavigation(locale: Locale): HeaderNavigationItem[] {
   return pickLocale(locale, {
     en: [
-      { label: "Services", href: "/services" },
-      { label: "Prices", href: "/prices" },
-      { label: "How It Works", href: "/how-it-works" },
-      { label: "Service Areas", href: "/service-areas" },
       { label: "About Us", href: "/about" },
+      { label: "How It Works", href: "/how-it-works" },
+      {
+        label: "Services",
+        href: "/services",
+        children: [
+          { label: "All Services", href: "/services" },
+          { label: "Service Areas", href: "/service-areas" },
+        ],
+      },
       { label: "Reviews", href: "/reviews" },
-      { label: "Contact", href: "/contact" },
+      {
+        label: "Contact",
+        href: "/contact",
+        children: [
+          { label: "Contact Page", href: "/contact" },
+          { label: company.phoneDisplay, href: company.phoneHref },
+        ],
+      },
     ],
     bg: [
-      { label: "Услуги", href: "/services" },
-      { label: "Цени", href: "/prices" },
-      { label: "Как работи", href: "/how-it-works" },
-      { label: "Райони", href: "/service-areas" },
       { label: "За нас", href: "/about" },
+      { label: "Как работи", href: "/how-it-works" },
+      {
+        label: "Услуги",
+        href: "/services",
+        children: [
+          { label: "Всички услуги", href: "/services" },
+          { label: "Райони", href: "/service-areas" },
+        ],
+      },
       { label: "Отзиви", href: "/reviews" },
-      { label: "Контакт", href: "/contact" },
+      {
+        label: "Контакт",
+        href: "/contact",
+        children: [
+          { label: "Контактна страница", href: "/contact" },
+          { label: company.phoneDisplay, href: company.phoneHref },
+        ],
+      },
     ],
   });
 }

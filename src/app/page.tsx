@@ -1,17 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Sparkles } from "lucide-react";
-import { AreaCard } from "@/components/blocks/area-card";
+import { ArrowRight, CheckCircle2, MapPin, MessageSquareText, PhoneCall, Sparkles } from "lucide-react";
 import { CtaBanner } from "@/components/blocks/cta-banner";
-import { FaqList } from "@/components/blocks/faq-list";
 import { ReviewSlotCard } from "@/components/blocks/review-slot-card";
 import { ServiceCard } from "@/components/blocks/service-card";
 import { HeroVisual } from "@/components/home/hero-visual";
 import { buttonClasses } from "@/components/ui/button";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { beforeAfterStories } from "@/data/before-after";
-import { heroImages } from "@/data/media";
 import {
   company,
   getCompanyContent,
@@ -20,7 +15,6 @@ import {
   getTrustHighlights,
   getWhyChooseUs,
 } from "@/data/company";
-import { faqs } from "@/data/faqs";
 import { reviewSlots } from "@/data/reviews";
 import { serviceAreas } from "@/data/service-areas";
 import { services } from "@/data/services";
@@ -33,9 +27,9 @@ export default async function Home() {
   const processSteps = getProcessSteps(locale);
   const trustHighlights = getTrustHighlights(locale);
   const whyChooseUs = getWhyChooseUs(locale);
-  const isBg = locale === "bg";
-  const featuredServices = services.filter((service) => service.featured);
-  const faqPreview = faqs.slice(0, 4);
+  const featuredServices = services.filter((service) => service.featured).slice(0, 4);
+  const featuredReasons = whyChooseUs.slice(0, 3);
+  const featuredReviews = reviewSlots.slice(0, 3);
 
   return (
     <>
@@ -52,33 +46,23 @@ export default async function Home() {
         }}
       />
 
-      <section className="section-space pb-10 pt-10 sm:pt-16">
-        <div className="shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,39rem)] lg:items-center">
+      <section className="section-space flex min-h-[calc(100svh-var(--header-height))] items-center pb-12 pt-6 sm:pb-16">
+        <div className="shell grid gap-12 xl:grid-cols-[minmax(0,1.02fr)_minmax(24rem,41rem)] xl:items-center">
           <div>
-            <span className="eyebrow">{isBg ? "MVP за запитвания" : "Lead-generation MVP"}</span>
-            <h1 className="mt-6 max-w-5xl text-4xl leading-[0.96] font-bold text-navy sm:text-5xl lg:text-6xl xl:text-7xl">
-              {isBg
-                ? "Професионално почистване без излишен стрес."
-                : "Professional cleaning without the stress."}
+            <span className="eyebrow">Dublin cleaning services</span>
+            <h1 className="mt-6 max-w-5xl text-4xl leading-[0.98] font-bold text-navy sm:text-5xl lg:text-6xl xl:text-7xl">
+              Reliable cleaning for busy homes, rentals, and small teams.
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted sm:text-xl">
-              {isBg
-                ? "Надеждно почистване за домове и офиси с обучени професионалисти, прозрачни цени и гъвкави посещения. Изградено около реалистични оценки, а не неясни обещания."
-                : "Reliable home and office cleaning with trained professionals, transparent pricing, and flexible appointments. Built around realistic estimates, not vague promises."}
+              Residential, rental, and office cleaning across Dublin with careful teams, clear arrival windows, and pricing that makes sense before the visit begins.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/get-a-quote"
-                className={buttonClasses({ tone: "primary", size: "lg" })}
-              >
-                {isBg ? "Поискай безплатна оферта" : "Get a Free Quote"}
+              <Link href="/get-a-quote" className={buttonClasses({ tone: "primary", size: "lg" })}>
+                Get a Quote
               </Link>
-              <Link
-                href="/services"
-                className={buttonClasses({ tone: "secondary", size: "lg" })}
-              >
-                {isBg ? "Виж услугите" : "View Services"}
+              <Link href="/services" className={buttonClasses({ tone: "secondary", size: "lg" })}>
+                Explore Services
               </Link>
             </div>
 
@@ -86,7 +70,7 @@ export default async function Home() {
               {trustHighlights.map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-[rgba(16,42,67,0.08)] bg-white/80 px-4 py-3 text-sm font-medium text-navy"
+                  className="flex items-center gap-3 rounded-[1rem] border border-[rgba(21,45,62,0.12)] bg-[rgba(255,250,244,0.52)] px-4 py-3 text-sm font-medium text-navy shadow-[0_12px_30px_rgba(15,31,42,0.06)]"
                 >
                   <CheckCircle2 className="h-4 w-4 text-success" />
                   {item}
@@ -94,417 +78,267 @@ export default async function Home() {
               ))}
             </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               {homeStats.map((stat) => (
-                <div key={stat.label} className="panel rounded-[1.5rem] p-5">
-                  <div className="text-3xl font-bold text-navy">{stat.value}</div>
-                  <div className="mt-2 text-sm leading-6 text-muted">{stat.label}</div>
+                <div
+                  key={stat.label}
+                  className="rounded-[1rem] border border-[rgba(21,45,62,0.12)] bg-[rgba(255,250,244,0.48)] px-4 py-3 shadow-[0_12px_30px_rgba(15,31,42,0.06)]"
+                >
+                  <div className="text-xl font-bold text-navy">{stat.value}</div>
+                  <div className="text-sm leading-6 text-muted">{stat.label}</div>
                 </div>
               ))}
             </div>
-
-            <div className="mt-10 max-w-3xl">
-              <div className="surface-card rounded-[2rem] p-6 sm:p-8">
-                <div className="flex items-center gap-3 text-sm font-semibold text-navy">
-                  <Sparkles className="h-4 w-4 text-turquoise" />
-                  {isBg ? "Бърз ориентир" : "Quick estimate panel"}
-                </div>
-                <h2 className="mt-5 text-3xl font-bold text-navy">
-                  {isBg ? "Започнете с четири лесни детайла." : "Start with four simple details."}
-                </h2>
-                <p className="mt-3 text-base leading-7 text-muted">
-                  {isBg
-                    ? "Това ви изпраща към пълната форма с вече попълнени основи. Без стена от петнадесет полета още в началото."
-                    : "This sends you into the full quote flow with the basics already in place. No fifteen-field wall up front."}
-                </p>
-
-                <form action="/get-a-quote" className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-service">
-                      {isBg ? "Услуга" : "Cleaning service"}
-                    </label>
-                    <select
-                      id="home-service"
-                      className="input-field"
-                      name="serviceSlug"
-                      defaultValue="regular-home-cleaning"
-                    >
-                      {services.map((service) => (
-                        <option key={service.slug} value={service.slug}>
-                          {service.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-type">
-                      {isBg ? "Тип имот" : "Property type"}
-                    </label>
-                    <select
-                      id="home-type"
-                      className="input-field"
-                      name="propertyType"
-                      defaultValue="apartment"
-                    >
-                      <option value="apartment">{isBg ? "Апартамент" : "Apartment"}</option>
-                      <option value="house">{isBg ? "Къща" : "House"}</option>
-                      <option value="office">{isBg ? "Офис" : "Office suite"}</option>
-                      <option value="rental">{isBg ? "Наем / Airbnb" : "Rental / Airbnb"}</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-size">
-                      {isBg ? "Приблизителен размер" : "Approximate size"}
-                    </label>
-                    <select
-                      id="home-size"
-                      className="input-field"
-                      name="size"
-                      defaultValue="medium"
-                    >
-                      <option value="compact">{isBg ? "Компактен" : "Compact"}</option>
-                      <option value="medium">{isBg ? "Среден" : "Medium"}</option>
-                      <option value="large">{isBg ? "Голям" : "Large"}</option>
-                      <option value="oversized">{isBg ? "Много голям" : "Oversized"}</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-postcode">
-                      {isBg ? "Пощенски код или град" : "Postcode or city"}
-                    </label>
-                    <input
-                      id="home-postcode"
-                      className="input-field"
-                      name="postcode"
-                      placeholder={isBg ? "напр. 1000 или София" : "e.g. 1000 or Sofia"}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className={buttonClasses({
-                      tone: "primary",
-                      fullWidth: true,
-                      size: "lg",
-                      className: "sm:col-span-2",
-                    })}
-                  >
-                    {isBg ? "Изчисли ориентир" : "Calculate Estimate"}
-                  </button>
-                </form>
-              </div>
-            </div>
           </div>
 
-          <div className="relative">
-            <div className="absolute left-3 top-0 hidden h-20 w-20 rounded-full border border-[rgba(28,181,163,0.2)] bg-white/55 blur-sm lg:block" />
+          <div className="grid gap-5">
             <HeroVisual locale={locale} />
-          </div>
-        </div>
-      </section>
 
-      <section className="section-space pt-0">
-        <div className="shell">
-          <SectionHeading
-            eyebrow={isBg ? "Основни услуги" : "Core services"}
-            title={
-              isBg
-                ? "Ясно разграничени линии услуги вместо една обща и неясна оферта."
-                : "Distinct service lines instead of one vague catch-all offer."
-            }
-            description={
-              isBg
-                ? "Всеки основен тип почистване има своя структура, ценова логика и отделна страница, за да може посетителят да разбере дали услугата му пасва."
-                : "Each major cleaning type has its own structure, pricing logic, and service page so visitors can understand fit before they contact you."
-            }
-          />
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {featuredServices.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
-            ))}
-          </div>
-          <div className="mt-6">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 font-semibold text-navy transition hover:gap-3"
-            >
-              {isBg ? "Разгледай всички услуги" : "Explore all services"}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space pt-0">
-        <div className="shell grid gap-6 lg:grid-cols-[24rem_minmax(0,1fr)]">
-          <div className="surface-card rounded-[1.75rem] p-6">
-            <span className="eyebrow">{isBg ? "Защо нас" : "Why choose us"}</span>
-            <h2 className="mt-5 text-3xl font-bold text-navy">
-              {isBg
-                ? "Доверието идва от яснота, не от украса."
-                : "Trust comes from clarity, not decoration."}
-            </h2>
-            <p className="mt-4 text-base leading-7 text-muted">
-              {isBg
-                ? "Сайтът е създаден така, че обхватът, процесът и следващите стъпки да са ясни още от първия екран."
-                : "The site is designed to make scope, process, and next steps feel obvious from the first screen."}
-            </p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2">
-            {whyChooseUs.map((reason) => (
-              <article key={reason} className="panel rounded-[1.5rem] p-6">
-                <ShieldCheck className="h-6 w-6 text-turquoise" />
-                <p className="mt-4 text-base leading-7 text-muted">{reason}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space pt-0">
-        <div className="shell">
-          <div className="overflow-hidden rounded-[2rem] border border-[rgba(16,42,67,0.08)] bg-white shadow-[0_32px_80px_rgba(16,42,67,0.08)]">
-            <div className="grid gap-0 lg:grid-cols-[1.15fr_minmax(0,0.85fr)]">
-              <div className="relative min-h-[22rem]">
-                <Image
-                  src={heroImages.office}
-                  alt={
-                    isBg
-                      ? "Светъл и подреден офис, подготвен за професионално почистване"
-                      : "Bright and orderly office prepared for professional cleaning"
-                  }
-                  className="h-full w-full object-cover"
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(16,42,67,0.06),_rgba(16,42,67,0.02))]" />
+            <div className="surface-card rounded-[1.35rem] p-6 sm:p-8">
+              <div className="flex items-center gap-3 text-sm font-semibold text-navy">
+                <Sparkles className="h-4 w-4 text-turquoise" />
+                Quick estimate
               </div>
-              <div className="flex flex-col justify-center p-8 sm:p-10">
-                <span className="eyebrow">
-                  {isBg ? "Видим стандарт" : "Visible standards"}
-                </span>
-                <h2 className="mt-5 text-3xl font-bold text-navy sm:text-4xl">
-                  {isBg
-                    ? "Подреденото пространство създава доверие още от първия поглед."
-                    : "An orderly space creates trust at first glance."}
-                </h2>
-                <p className="mt-4 text-base leading-8 text-muted">
-                  {isBg
-                    ? "Светлите работни места, чистите повърхности и подреденото излъчване подсилват усещането за грижа и готовност, което клиентите очакват."
-                    : "Bright work areas, clean surfaces, and an orderly presentation reinforce the standard of care clients expect."}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+              <h2 className="mt-5 text-3xl font-bold text-navy">Start with the essentials.</h2>
+              <p className="mt-3 text-base leading-7 text-muted">
+                Share the service type, property basics, and area. We will use that to frame the right scope before a coordinator confirms the final visit details.
+              </p>
 
-      <section className="section-space pt-0">
-        <div className="shell">
-          <SectionHeading
-            eyebrow={isBg ? "Как работи" : "How it works"}
-            title={
-              isBg
-                ? "Практичен процес за хора, които са готови сега, и за хора, които първо искат увереност."
-                : "A practical conversion flow for people who are ready now and people who need reassurance first."
-            }
-            description={
-              isBg
-                ? "Пътят е прост: изберете услуга, получете реалистична оценка, потвърдете часа ръчно и проверете резултата по ясен обхват."
-                : "The path is simple: choose the service, get a realistic estimate, confirm the appointment manually, and inspect the result against a defined scope."
-            }
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <article key={step.title} className="panel rounded-[1.75rem] p-6">
-                <div className="text-sm font-semibold text-turquoise">
-                  {isBg ? `Стъпка ${index + 1}` : `Step ${index + 1}`}
-                </div>
-                <h3 className="mt-3 text-xl font-bold text-navy">{step.title}</h3>
-                <p className="mt-3 text-base leading-7 text-muted">{step.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space pt-0">
-        <div className="shell">
-          <SectionHeading
-            eyebrow={isBg ? "Преди и след" : "Before & after"}
-            title={
-              isBg
-                ? "Най-силното доказателство за конверсия трябва да идва от реални обекти."
-                : "The strongest conversion proof should come from real jobs."
-            }
-            description={
-              isBg
-                ? "Тази версия държи структурата честна: оформлението е готово за реални снимки и казуси, без фалшиво stock съдържание."
-                : "This build keeps the structure honest: the layout is ready for real project photography and case-study notes without faking stock-image proof."
-            }
-          />
-          <div className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-            {beforeAfterStories.map((story) => (
-              <article key={story.title} className="panel overflow-hidden rounded-[1.75rem]">
-                <div className="grid grid-cols-2">
-                  <div className="bg-[linear-gradient(135deg,_rgba(16,42,67,0.9),_rgba(16,42,67,0.7))] p-6 text-white">
-                    <div className="text-sm font-semibold uppercase tracking-[0.12em] text-white/70">
-                      {isBg ? "Преди" : "Before"}
-                    </div>
-                    <p className="mt-4 text-sm leading-7 text-white/78">{story.before}</p>
-                  </div>
-                  <div className="bg-[linear-gradient(135deg,_rgba(28,181,163,0.16),_rgba(255,255,255,0.98))] p-6 text-navy">
-                    <div className="text-sm font-semibold uppercase tracking-[0.12em] text-turquoise">
-                      {isBg ? "След" : "After"}
-                    </div>
-                    <p className="mt-4 text-sm leading-7 text-muted">{story.after}</p>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="text-sm font-semibold text-turquoise">{story.category}</div>
-                  <h3 className="mt-3 text-xl font-bold text-navy">{story.title}</h3>
-                  <p className="mt-3 text-base leading-7 text-muted">{story.outcome}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space pt-0">
-        <div className="shell">
-          <SectionHeading
-            eyebrow={isBg ? "Преглед на цени" : "Pricing preview"}
-            title={
-              isBg
-                ? "Достатъчно ценови детайл за увереност, без фалшива точност."
-                : "Enough pricing detail to build confidence, without false precision."
-            }
-            description={
-              isBg
-                ? "Сайтът трябва ясно да обяснява ценовата логика и да оставя окончателното потвърждение за човешки преглед."
-                : "A conversion-first cleaning site should explain pricing logic clearly and push final confirmation into a human review where scope actually gets checked."
-            }
-          />
-          <div className="mt-10 overflow-hidden rounded-[1.75rem] border border-[rgba(16,42,67,0.08)] bg-white shadow-[0_28px_70px_rgba(16,42,67,0.08)]">
-            <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 border-b border-[rgba(16,42,67,0.06)] px-6 py-4 text-sm font-semibold text-navy">
-              <div>{isBg ? "Услуга" : "Service"}</div>
-              <div>{isBg ? "Ценообразуване" : "Pricing model"}</div>
-              <div>{isBg ? "Типична продължителност" : "Typical duration"}</div>
-            </div>
-            {services.slice(0, 5).map((service) => (
-              <div
-                key={service.slug}
-                className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 px-6 py-4 text-sm text-muted odd:bg-[rgba(16,42,67,0.02)]"
-              >
+              <form action="/get-a-quote" className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div>
-                  <div className="font-semibold text-navy">{service.name}</div>
-                  <div className="mt-1">{service.audience}</div>
+                  <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-service">
+                    Cleaning service
+                  </label>
+                  <select
+                    id="home-service"
+                    className="input-field"
+                    name="serviceSlug"
+                    defaultValue="regular-home-cleaning"
+                  >
+                    {services.map((service) => (
+                      <option key={service.slug} value={service.slug}>
+                        {service.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div>{service.pricingLabel}</div>
-                <div>{service.durationLabel}</div>
-              </div>
-            ))}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-type">
+                    Property type
+                  </label>
+                  <select id="home-type" className="input-field" name="propertyType" defaultValue="apartment">
+                    <option value="apartment">Apartment</option>
+                    <option value="house">House</option>
+                    <option value="office">Office suite</option>
+                    <option value="rental">Rental / Airbnb</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-size">
+                    Approximate size
+                  </label>
+                  <select id="home-size" className="input-field" name="size" defaultValue="medium">
+                    <option value="compact">Compact</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="oversized">Oversized</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-navy" htmlFor="home-postcode">
+                    Area or postcode
+                  </label>
+                  <input
+                    id="home-postcode"
+                    className="input-field"
+                    name="postcode"
+                    placeholder="e.g. Dublin 4 or D04"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className={buttonClasses({
+                    tone: "primary",
+                    fullWidth: true,
+                    size: "lg",
+                    className: "sm:col-span-2",
+                  })}
+                >
+                  Start My Quote
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section-space pt-0">
-        <div className="shell">
-          <SectionHeading
-            eyebrow={isBg ? "Отзиви" : "Reviews"}
-            title={
-              isBg
-                ? "Секцията за отзиви е готова за пускане, но остава честна."
-                : "The review section is launch-ready, but still honest."
-            }
-            description={
-              isBg
-                ? "Тъй като все още няма реални отзиви, сайтът държи структурата готова, без да измисля имена, дати или платформи."
-                : "Because real reviews were not provided yet, the site keeps the testimonial layout ready without inventing names, dates, or platform proof."
-            }
-          />
-          <div className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-            {reviewSlots.map((review) => (
-              <ReviewSlotCard key={review.title} review={review} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space pt-0">
-        <div className="shell">
-          <SectionHeading
-            eyebrow={isBg ? "Райони" : "Service areas"}
-            title={
-              isBg
-                ? "Страниците за покритие са структурирани за локално търсене, без масово генерирано празно съдържание."
-                : "Coverage pages are structured for local search, without mass-generated thin content."
-            }
-            description={
-              isBg
-                ? "Всяка страница за район е готова за реални локални бележки, подробности за достъп и акцент върху услуги."
-                : "Each area page is ready for real local notes, access details, and service emphasis. Fewer credible pages will outperform hundreds of empty city swaps."
-            }
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {serviceAreas.map((area) => (
-              <AreaCard key={area.slug} area={area} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space pt-0">
-        <div className="shell grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div className="shell grid gap-8 xl:grid-cols-[minmax(0,1fr)_24rem]">
           <div>
             <SectionHeading
-              eyebrow={isBg ? "Често задавани" : "Frequently asked"}
-              title={
-                isBg
-                  ? "Честите притеснения са адресирани, преди някой да вдигне телефона."
-                  : "Common concerns answered before someone has to pick up the phone."
-              }
-              description={
-                isBg
-                  ? "Силното FAQ съдържание намалява несигурността около оценките, достъпа и границите на обхвата."
-                  : "Strong FAQ content reduces uncertainty around estimates, access, and scope boundaries."
-              }
+              eyebrow="Services"
+              title="Choose the service path first, then go deeper only where you need to."
+              description="The homepage now points customers into the right service quickly. Detailed scope, pricing logic, and local notes stay on the dedicated pages where they are easier to compare."
             />
-            <div className="mt-8">
-              <FaqList items={faqPreview} />
+
+            <div className="mt-10 grid gap-6 xl:grid-cols-2">
+              {featuredServices.map((service) => (
+                <ServiceCard key={service.slug} service={service} />
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-5 text-sm font-semibold">
+              <Link href="/services" className="inline-flex items-center gap-2 text-navy transition hover:gap-3">
+                Explore all services
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/service-areas"
+                className="inline-flex items-center gap-2 text-navy transition hover:gap-3"
+              >
+                View service areas
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
-          <aside className="surface-card rounded-[1.75rem] p-6">
-            <div className="flex items-center gap-3 text-sm font-semibold text-navy">
-              <Clock3 className="h-4 w-4 text-turquoise" />
-              {isBg ? "Какво следва" : "What happens next"}
+
+          <aside className="surface-card rounded-[1.35rem] p-6 sm:p-8">
+            <span className="eyebrow">Why clients rebook</span>
+            <h2 className="mt-5 text-3xl font-bold text-navy">A calmer structure from quote to handoff.</h2>
+            <div className="mt-6 space-y-4">
+              {featuredReasons.map((reason) => (
+                <div key={reason} className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-turquoise" />
+                  <p className="text-base leading-7 text-muted">{reason}</p>
+                </div>
+              ))}
             </div>
-            <ol className="mt-5 space-y-4 text-base leading-7 text-muted">
-              <li>
-                1.{" "}
-                {isBg
-                  ? "Бизнесът получава структурирано запитване вместо неясно съобщение."
-                  : "The business receives a structured lead instead of a vague message."}
-              </li>
-              <li>
-                2.{" "}
-                {isBg
-                  ? "Ориентировъчният диапазон се проверява спрямо достъпа, състоянието и екстрите."
-                  : "The estimate range is checked against access, condition, and extras."}
-              </li>
-              <li>
-                3.{" "}
-                {isBg
-                  ? "Реален човек потвърждава крайната оферта и часовия прозорец."
-                  : "A real person confirms the final quote and appointment window."}
-              </li>
-            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <section className="section-space pt-0">
+        <div className="shell grid gap-8 xl:grid-cols-[minmax(0,1fr)_23rem]">
+          <div>
+            <SectionHeading
+              eyebrow="How it works"
+              title="A simple path that gets people to the right information fast."
+              description="Customers do not have to learn the whole business from the homepage. Start with the service, send the essentials, then confirm the visit with a real coordinator."
+            />
+
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {processSteps.map((step, index) => (
+                <article key={step.title} className="panel rounded-[1.25rem] p-6">
+                  <div className="text-sm font-semibold text-turquoise">{`Step ${index + 1}`}</div>
+                  <h3 className="mt-3 text-xl font-bold text-navy">{step.title}</h3>
+                  <p className="mt-3 text-base leading-7 text-muted">{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <aside className="surface-card rounded-[1.35rem] p-6 sm:p-8">
+            <span className="eyebrow">Service areas</span>
+            <h2 className="mt-5 text-3xl font-bold text-navy">
+              Coverage stays focused so arrival windows stay believable.
+            </h2>
+            <div className="mt-6 space-y-4">
+              {serviceAreas.map((area) => (
+                <div
+                  key={area.slug}
+                  className="rounded-[1rem] border border-[rgba(21,45,62,0.12)] bg-[rgba(255,250,244,0.42)] p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <MapPin className="mt-1 h-4 w-4 shrink-0 text-turquoise" />
+                    <div>
+                      <h3 className="font-semibold text-navy">{area.name}</h3>
+                      <p className="mt-1 text-sm leading-6 text-muted">{area.responseTime}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
             <Link
-              href="/faq"
+              href="/service-areas"
               className="mt-6 inline-flex items-center gap-2 font-semibold text-navy transition hover:gap-3"
             >
-              {isBg ? "Виж всички ЧЗВ" : "Read all FAQs"}
+              See local coverage
               <ArrowRight className="h-4 w-4" />
             </Link>
+          </aside>
+        </div>
+      </section>
+
+      <section className="section-space pt-0">
+        <div className="shell grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem]">
+          <div>
+            <SectionHeading
+              eyebrow="Reviews"
+              title="Proof stays visible, but the page does not drown in it."
+              description="A few recent reviews stay on the homepage for trust. The full reviews page carries the wider evidence set."
+            />
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+              {featuredReviews.map((review) => (
+                <ReviewSlotCard key={review.id} review={review} />
+              ))}
+            </div>
+
+            <div className="mt-6">
+              <Link
+                href="/reviews"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-navy transition hover:gap-3"
+              >
+                Read all reviews
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+
+          <aside className="surface-card rounded-[1.35rem] p-6 sm:p-8">
+            <span className="eyebrow">Contact</span>
+            <h2 className="mt-5 text-3xl font-bold text-navy">Need to talk through the job first?</h2>
+            <p className="mt-4 text-base leading-7 text-muted">
+              Use the contact page for callbacks and service-fit questions, or call directly when timing matters more than quoting detail.
+            </p>
+
+            <div className="mt-6 space-y-3 text-sm leading-7 text-muted">
+              <p>
+                <strong className="text-navy">Call:</strong>{" "}
+                <a className="font-medium text-navy transition hover:text-turquoise" href={company.phoneHref}>
+                  {company.phoneDisplay}
+                </a>
+              </p>
+              <p>
+                <strong className="text-navy">Email:</strong>{" "}
+                <a
+                  className="font-medium text-navy transition hover:text-turquoise"
+                  href={`mailto:${company.email}`}
+                >
+                  {company.email}
+                </a>
+              </p>
+              <p>
+                <strong className="text-navy">Hours:</strong> {companyContent.openingHours[0]}
+              </p>
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3">
+              <Link
+                href="/contact"
+                className={buttonClasses({ tone: "primary", fullWidth: true, className: "min-h-12" })}
+              >
+                <MessageSquareText className="h-4 w-4" />
+                Contact Us
+              </Link>
+              <a
+                href={company.phoneHref}
+                className={buttonClasses({ tone: "secondary", fullWidth: true, className: "min-h-12" })}
+              >
+                <PhoneCall className="h-4 w-4" />
+                Call Now
+              </a>
+            </div>
           </aside>
         </div>
       </section>

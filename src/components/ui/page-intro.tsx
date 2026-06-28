@@ -24,7 +24,7 @@ export function PageIntro({
   aside,
 }: PageIntroProps) {
   return (
-    <section className="section-space pt-10 sm:pt-14 md:pt-16">
+    <section className="section-space pt-6 sm:pt-8 md:pt-10">
       <div className="shell grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_24rem] lg:items-start">
         <div>
           <span className="eyebrow">{eyebrow}</span>
@@ -51,9 +51,7 @@ export function PageIntro({
             </div>
           ) : null}
         </div>
-        {aside ? (
-          <aside className={cx("surface-card rounded-[1.75rem] p-6")}>{aside}</aside>
-        ) : null}
+        {aside ? <aside className={cx("surface-card rounded-[1.25rem] p-6")}>{aside}</aside> : null}
       </div>
     </section>
   );

@@ -5,26 +5,22 @@ import { company } from "@/data/company";
 import type { Locale } from "@/lib/locale";
 
 export function CtaBanner({ locale = "en" }: { locale?: Locale }) {
-  const isBg = locale === "bg";
+  void locale;
 
   return (
     <section className="section-space pt-0">
       <div className="shell">
-        <div className="overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,_#102A43,_#163C5B)] px-6 py-10 text-white shadow-[0_32px_80px_rgba(16,42,67,0.28)] sm:px-10">
+        <div className="overflow-hidden rounded-[1.5rem] bg-[linear-gradient(135deg,_#223748,_#2d4a5f)] px-6 py-10 text-white shadow-[0_28px_64px_rgba(29,55,72,0.24)] sm:px-10">
           <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
             <div>
               <span className="eyebrow border-white/20 bg-white/10 text-white">
-                {isBg ? "Финален CTA" : "Final conversion"}
+                Request a quote
               </span>
               <h2 className="mt-5 max-w-2xl text-2xl leading-tight font-bold sm:text-3xl">
-                {isBg
-                  ? "Кажете ни какво трябва да се почисти. Ще отговорим с ясна оферта и следваща практична стъпка."
-                  : "Tell us what needs cleaning. We will respond with a clear quote and the next practical step."}
+                Tell us what needs cleaning and we will help you plan the next step.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-white/78 sm:text-base">
-                {isBg
-                  ? "Използвайте структурираната форма за оферта, когато ви трябва ценови ориентир, или се обадете директно при спешен срок."
-                  : "Use the structured quote form when you want pricing context, or call directly when timing is urgent."}
+                Use the structured quote form when you want pricing context, or call directly when the timing is urgent.
               </p>
             </div>
             <div className="flex flex-col gap-3">
@@ -37,7 +33,7 @@ export function CtaBanner({ locale = "en" }: { locale?: Locale }) {
                 })}
               >
                 <MessageSquareText className="h-4 w-4" />
-                {isBg ? "Поискай оферта" : "Request a Quote"}
+                Request a Quote
               </Link>
               <a
                 href={company.phoneHref}
@@ -48,13 +44,13 @@ export function CtaBanner({ locale = "en" }: { locale?: Locale }) {
                 })}
               >
                 <Phone className="h-4 w-4" />
-                {isBg ? "Обади се сега" : "Call Now"}
+                Call Now
               </a>
               <a
                 href={company.whatsappHref}
                 className="text-sm font-medium text-white/76 transition hover:text-white"
               >
-                {isBg ? "Пиши в WhatsApp" : "Message on WhatsApp"}
+                Message on WhatsApp
               </a>
             </div>
           </div>

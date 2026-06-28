@@ -1,8 +1,10 @@
 "use server";
 
+import { headers } from "next/headers";
 import { buildContactNotification } from "@/lib/email/templates";
 import { sendInternalNotification } from "@/lib/email/notifications";
 import { createContactRecord, saveContactRecord } from "@/lib/leads/contact-store";
+import { buildRequestFingerprint, consumeRateLimit } from "@/lib/security/rate-limit";
 import { parseContactFormData } from "@/lib/validation/contact";
 import type { FormActionState } from "@/types/forms";
 
@@ -10,6 +12,15 @@ export async function submitContactRequest(
   _previousState: FormActionState,
   formData: FormData,
 ): Promise<FormActionState> {
+  const honeypot = String(formData.get("companyWebsite") ?? "").trim();
+
+  if (honeypot) {
+    return {
+      status: "success",
+      message: "Thanks. Your message has been received.",
+    };
+  }
+
   const parsed = parseContactFormData(formData);
 
   if (!parsed.success) {
@@ -17,6 +28,20 @@ export async function submitContactRequest(
       status: "error",
       message: "Please review the highlighted fields before sending your message.",
       fieldErrors: parsed.error.flatten().fieldErrors,
+    };
+  }
+
+  const requestHeaders = await headers();
+  const rateLimit = consumeRateLimit({
+    key: buildRequestFingerprint(requestHeaders, "contact"),
+    limit: 4,
+    windowMs: 15 * 60 * 1000,
+  });
+
+  if (!rateLimit.allowed) {
+    return {
+      status: "error",
+      message: `Please wait about ${rateLimit.retryAfterSeconds} seconds before sending another message.`,
     };
   }
 
@@ -34,8 +59,7 @@ export async function submitContactRequest(
 
     return {
       status: "success",
-      message:
-        "Message received. Your enquiry is ready for follow-up from the business side.",
+      message: "Message received. A coordinator will follow up shortly.",
       referenceId: record.referenceCode,
     };
   } catch {

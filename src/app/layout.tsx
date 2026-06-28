@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "Reliable home and office cleaning with trained professionals, transparent pricing, and flexible appointments.",
     url: company.siteUrl,
     siteName: company.brandName,
-    locale: "en_GB",
+    locale: "en_IE",
     type: "website",
   },
   twitter: {
@@ -54,13 +54,12 @@ export default async function RootLayout({
       lang={locale}
       className="h-full antialiased"
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col bg-background text-foreground">
         <div className="relative flex min-h-screen flex-col overflow-x-hidden">
           <DecorativeBackgrounds />
-          <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[radial-gradient(circle_at_top_right,_rgba(28,181,163,0.18),_transparent_45%),linear-gradient(180deg,_rgba(16,42,67,0.04),_transparent_65%)]" />
-          <div className="pointer-events-none absolute inset-x-0 top-[30rem] -z-10 h-[28rem] bg-[radial-gradient(circle_at_top_left,_rgba(233,162,59,0.12),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(16,42,67,0.08),_transparent_40%)]" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[20rem] bg-[linear-gradient(180deg,rgba(47,140,119,0.06),transparent_100%)]" />
           <SiteHeader locale={locale} companyContent={companyContent} />
-          <main className="relative flex-1">{children}</main>
+          <main className="relative flex-1 pb-28 pt-[var(--header-height)] lg:pb-0">{children}</main>
           <SiteFooter locale={locale} companyContent={companyContent} />
           <MobileQuoteBar locale={locale} />
         </div>

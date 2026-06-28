@@ -2,11 +2,22 @@ import { NextResponse } from "next/server";
 import { sendInternalNotification } from "@/lib/email/notifications";
 import { buildContactNotification } from "@/lib/email/templates";
 import { createContactRecord, saveContactRecord } from "@/lib/leads/contact-store";
+import { buildRequestFingerprint, consumeRateLimit } from "@/lib/security/rate-limit";
 import { parseContactPayload } from "@/lib/validation/contact";
 
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
+
+    if (
+      typeof payload === "object" &&
+      payload !== null &&
+      typeof (payload as { companyWebsite?: unknown }).companyWebsite === "string" &&
+      (payload as { companyWebsite: string }).companyWebsite.trim()
+    ) {
+      return NextResponse.json({ ok: true, message: "Request received." });
+    }
+
     const parsed = parseContactPayload(payload);
 
     if (!parsed.success) {
@@ -17,6 +28,22 @@ export async function POST(request: Request) {
           errors: parsed.error.flatten().fieldErrors,
         },
         { status: 400 },
+      );
+    }
+
+    const rateLimit = consumeRateLimit({
+      key: buildRequestFingerprint(request.headers, "contact"),
+      limit: 4,
+      windowMs: 15 * 60 * 1000,
+    });
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: `Please wait about ${rateLimit.retryAfterSeconds} seconds before sending another message.`,
+        },
+        { status: 429 },
       );
     }
 

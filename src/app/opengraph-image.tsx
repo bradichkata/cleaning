@@ -17,7 +17,7 @@ export default function OpenGraphImage() {
           height: "100%",
           width: "100%",
           background:
-            "linear-gradient(135deg, rgba(16,42,67,1) 0%, rgba(22,60,91,1) 55%, rgba(28,181,163,0.92) 100%)",
+            "linear-gradient(135deg, rgba(34,55,72,1) 0%, rgba(45,74,95,1) 52%, rgba(47,140,119,0.92) 100%)",
           color: "white",
           padding: 72,
           justifyContent: "space-between",
@@ -37,12 +37,12 @@ export default function OpenGraphImage() {
               display: "flex",
               border: "1px solid rgba(255,255,255,0.18)",
               padding: "10px 16px",
-              borderRadius: 999,
+              borderRadius: 18,
               fontSize: 22,
               alignSelf: "flex-start",
             }}
           >
-            Cleaning services MVP
+            Dublin cleaning services
           </div>
           <div
             style={{
@@ -78,7 +78,7 @@ export default function OpenGraphImage() {
             fontWeight: 700,
           }}
         >
-          NC
+          {company.brandMark}
         </div>
       </div>
     ),

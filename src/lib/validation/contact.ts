@@ -17,6 +17,9 @@ export const contactRequestSchema = z.object({
     .string()
     .trim()
     .min(20, "Please include a little more detail about the job"),
+  consent: z.boolean().refine((value) => value, {
+    message: "Please confirm you agree to be contacted about this request",
+  }),
   sourcePage: z.string().trim().default("contact-page"),
 });
 
@@ -28,6 +31,7 @@ export function parseContactFormData(formData: FormData) {
     serviceInterest: formData.get("serviceInterest"),
     preferredContactMethod: formData.get("preferredContactMethod"),
     message: formData.get("message"),
+    consent: formData.get("consent") === "on",
     sourcePage: formData.get("sourcePage") || "contact-page",
   });
 }

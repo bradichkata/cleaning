@@ -1,5 +1,5 @@
-export const supportedLocales = ["en", "bg"] as const;
-export type Locale = (typeof supportedLocales)[number];
+export type Locale = "en" | "bg";
+export const supportedLocales: readonly Locale[] = ["en"];
 
 export const localeCookieName = "site-language";
 

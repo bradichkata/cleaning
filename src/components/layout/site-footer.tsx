@@ -17,14 +17,12 @@ export function SiteFooter({
   const footerNavigation = getFooterNavigation(locale);
 
   return (
-    <footer className="border-t border-[rgba(16,42,67,0.08)] bg-navy text-white">
+    <footer className="border-t border-[rgba(29,55,72,0.08)] bg-navy text-white">
       <div className="shell py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.2fr_repeat(4,minmax(0,1fr))]">
           <div className="max-w-sm md:col-span-2 lg:col-span-1">
             <div className="font-display text-2xl font-bold">{company.brandName}</div>
-            <p className="mt-4 text-sm leading-7 text-white/72">
-              {companyContent.description}
-            </p>
+            <p className="mt-4 text-sm leading-7 text-white/72">{companyContent.description}</p>
             <div className="mt-6 space-y-2 text-sm text-white/72">
               <div>{company.legalName}</div>
               <div>{company.registration}</div>
@@ -61,7 +59,7 @@ export function SiteFooter({
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/62 md:flex-row md:items-center md:justify-between">
           <p>{companyContent.footerPlaceholderNote}</p>
           <p>
-            {companyContent.serviceAreasLabel}: {company.serviceAreas.join(" • ")}
+            {companyContent.serviceAreasLabel}: {company.serviceAreas.join(" | ")}
           </p>
         </div>
       </div>

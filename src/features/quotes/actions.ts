@@ -1,9 +1,11 @@
 "use server";
 
+import { headers } from "next/headers";
 import { buildQuoteNotification } from "@/lib/email/templates";
 import { sendInternalNotification } from "@/lib/email/notifications";
 import { createQuoteRecord, saveQuoteRecord } from "@/lib/leads/quote-store";
 import { calculateQuoteEstimate } from "@/lib/pricing";
+import { buildRequestFingerprint, consumeRateLimit } from "@/lib/security/rate-limit";
 import { parseQuoteFormData } from "@/lib/validation/quote";
 import type { FormActionState } from "@/types/forms";
 
@@ -11,6 +13,15 @@ export async function submitQuoteRequest(
   _previousState: FormActionState,
   formData: FormData,
 ): Promise<FormActionState> {
+  const honeypot = String(formData.get("companyWebsite") ?? "").trim();
+
+  if (honeypot) {
+    return {
+      status: "success",
+      message: "Thanks. Your request has been received.",
+    };
+  }
+
   const parsed = parseQuoteFormData(formData);
 
   if (!parsed.success) {
@@ -18,6 +29,20 @@ export async function submitQuoteRequest(
       status: "error",
       message: "Please correct the highlighted fields and try again.",
       fieldErrors: parsed.error.flatten().fieldErrors,
+    };
+  }
+
+  const requestHeaders = await headers();
+  const rateLimit = consumeRateLimit({
+    key: buildRequestFingerprint(requestHeaders, "quote"),
+    limit: 5,
+    windowMs: 15 * 60 * 1000,
+  });
+
+  if (!rateLimit.allowed) {
+    return {
+      status: "error",
+      message: `Please wait about ${rateLimit.retryAfterSeconds} seconds before sending another quote request.`,
     };
   }
 
@@ -44,8 +69,7 @@ export async function submitQuoteRequest(
 
     return {
       status: "success",
-      message:
-        "Your quote request has been logged. A team member can now review the scope and confirm the next step.",
+      message: "Your quote request has been logged. A coordinator will review the scope and confirm the next step.",
       referenceId: record.referenceCode,
       estimate,
     };

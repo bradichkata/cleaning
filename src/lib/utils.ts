@@ -1,12 +1,13 @@
 import { company } from "@/data/company";
+import { pricingConfig } from "@/data/pricing";
 
 export function cx(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
-const currencyFormatter = new Intl.NumberFormat("en-IE", {
+const currencyFormatter = new Intl.NumberFormat(pricingConfig.currencyLocale, {
   style: "currency",
-  currency: "EUR",
+  currency: pricingConfig.currencyCode,
   maximumFractionDigits: 0,
 });
 

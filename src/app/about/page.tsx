@@ -1,61 +1,51 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/ui/page-intro";
-import { company, getWhyChooseUs } from "@/data/company";
+import { company, getCompanyContent, getWhyChooseUs } from "@/data/company";
 import { getCurrentLocale } from "@/lib/server-locale";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
   description:
-    "See the operating principles, trust positioning, and delivery standards behind the cleaning-services MVP.",
+    "Learn about Harbor & Pine Cleaning, our service standards, and how we handle quoting, access, and repeat visits across Dublin.",
   path: "/about",
 });
 
 export default async function AboutPage() {
   const locale = await getCurrentLocale();
   const whyChooseUs = getWhyChooseUs(locale);
-  const isBg = locale === "bg";
+  const companyContent = getCompanyContent(locale);
 
   return (
     <>
       <PageIntro
-        eyebrow={isBg ? "За компанията" : "About the company"}
-        title={
-          isBg
-            ? "Създадено да излъчва надеждност, внимание, точност и прозрачност."
-            : "Built to feel reliable, careful, punctual, and transparent."
-        }
-        description={
-          isBg
-            ? "Тонът на сайта следва бизнес модела: ясен процес, реалистично ценообразуване, ниско смущение и обхват, който може да бъде защитен след изпълнение."
-            : "The site tone follows the business model: clear process, realistic pricing, low-disruption service, and scope that can be defended after the job."
-        }
+        eyebrow="About Harbor & Pine"
+        title="Careful cleaning, reliable communication, and practical service planning."
+        description="Harbor & Pine Cleaning is positioned around the details that make repeat service easier: realistic quoting, tidy handoffs, and teams that arrive prepared for the property in front of them."
       />
       <section className="section-space pt-0">
         <div className="shell grid gap-6 md:grid-cols-[minmax(0,1fr)_24rem]">
-          <article className="panel rounded-[1.75rem] p-6">
-            <h2 className="text-2xl font-bold text-navy">
-              {isBg ? "Принципи на работа" : "Operating principles"}
-            </h2>
+          <article className="panel rounded-[1.25rem] p-6">
+            <h2 className="text-2xl font-bold text-navy">How we work</h2>
             <div className="mt-5 space-y-4 text-base leading-7 text-muted">
               {whyChooseUs.map((item) => (
                 <p key={item}>{item}</p>
               ))}
             </div>
           </article>
-          <article className="surface-card rounded-[1.75rem] p-6">
-            <h2 className="text-2xl font-bold text-navy">
-              {isBg ? "Бележка за пускане" : "Launch note"}
-            </h2>
-            <p className="mt-4 text-base leading-7 text-muted">
-              {isBg
-                ? "Текущата версия използва демо фирмени данни, докато бъдат предоставени реалното име на компанията, регистрация, снимки на екипа и правните текстове."
-                : "The current build uses demo business details until the real company name, registration, team photography, and legal wording are supplied."}
-            </p>
-            <div className="mt-6 space-y-2 text-sm text-muted">
+          <article className="surface-card rounded-[1.25rem] p-6">
+            <h2 className="text-2xl font-bold text-navy">Company details</h2>
+            <p className="mt-4 text-base leading-7 text-muted">{companyContent.description}</p>
+            <div className="mt-6 space-y-2 text-sm leading-6 text-muted">
               <div>{company.legalName}</div>
               <div>{company.registration}</div>
               <div>{company.address}</div>
+              <a className="block text-navy hover:underline" href={`mailto:${company.email}`}>
+                {company.email}
+              </a>
+              <a className="block text-navy hover:underline" href={company.phoneHref}>
+                {company.phoneDisplay}
+              </a>
             </div>
           </article>
         </div>

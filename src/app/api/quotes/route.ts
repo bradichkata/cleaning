@@ -3,11 +3,22 @@ import { sendInternalNotification } from "@/lib/email/notifications";
 import { buildQuoteNotification } from "@/lib/email/templates";
 import { createQuoteRecord, saveQuoteRecord } from "@/lib/leads/quote-store";
 import { calculateQuoteEstimate } from "@/lib/pricing";
+import { buildRequestFingerprint, consumeRateLimit } from "@/lib/security/rate-limit";
 import { parseQuotePayload } from "@/lib/validation/quote";
 
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
+
+    if (
+      typeof payload === "object" &&
+      payload !== null &&
+      typeof (payload as { companyWebsite?: unknown }).companyWebsite === "string" &&
+      (payload as { companyWebsite: string }).companyWebsite.trim()
+    ) {
+      return NextResponse.json({ ok: true, message: "Request received." });
+    }
+
     const parsed = parseQuotePayload(payload);
 
     if (!parsed.success) {
@@ -18,6 +29,22 @@ export async function POST(request: Request) {
           errors: parsed.error.flatten().fieldErrors,
         },
         { status: 400 },
+      );
+    }
+
+    const rateLimit = consumeRateLimit({
+      key: buildRequestFingerprint(request.headers, "quote"),
+      limit: 5,
+      windowMs: 15 * 60 * 1000,
+    });
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: `Please wait about ${rateLimit.retryAfterSeconds} seconds before sending another quote request.`,
+        },
+        { status: 429 },
       );
     }
 

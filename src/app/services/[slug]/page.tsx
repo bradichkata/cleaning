@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/blocks/cta-banner";
 import { FaqList } from "@/components/blocks/faq-list";
 import { PageIntro } from "@/components/ui/page-intro";
 import { QuoteForm } from "@/components/forms/quote-form";
 import { beforeAfterStories } from "@/data/before-after";
+import { getCompanyContent } from "@/data/company";
 import { faqs } from "@/data/faqs";
 import { getServiceBySlug, services } from "@/data/services";
+import { getCurrentLocale } from "@/lib/server-locale";
 import { buildMetadata } from "@/lib/seo";
 
 type ServicePageProps = {
@@ -39,15 +42,15 @@ export async function generateMetadata({
 export default async function ServicePage({ params }: ServicePageProps) {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
+  const locale = await getCurrentLocale();
+  const companyContent = getCompanyContent(locale);
 
   if (!service) {
     notFound();
   }
 
   const relevantFaqs = faqs.filter((item) =>
-    item.tags.some((tag) =>
-      ["services", "quote", "prices", service.slug].includes(tag),
-    ),
+    item.tags.some((tag) => ["services", "quote", "prices", service.slug].includes(tag)),
   );
 
   return (
@@ -79,7 +82,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section className="section-space pt-0">
         <div className="shell grid gap-6 lg:grid-cols-3">
           {service.benefits.map((benefit) => (
-            <article key={benefit} className="panel rounded-[1.5rem] p-6">
+            <article key={benefit} className="panel rounded-[1.25rem] p-6">
               <p className="text-base leading-7 text-muted">{benefit}</p>
             </article>
           ))}
@@ -88,27 +91,27 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <section className="section-space pt-0">
         <div className="shell grid gap-6 lg:grid-cols-3">
-          <article className="panel rounded-[1.75rem] p-6">
+          <article className="panel rounded-[1.25rem] p-6">
             <h2 className="text-2xl font-bold text-navy">What is included</h2>
-            <ul className="mt-5 space-y-3 text-base leading-7 text-muted">
+            <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
               {service.included.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
-          <article className="panel rounded-[1.75rem] p-6">
+          <article className="panel rounded-[1.25rem] p-6">
             <h2 className="text-2xl font-bold text-navy">What is not included</h2>
-            <ul className="mt-5 space-y-3 text-base leading-7 text-muted">
+            <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
               {service.excluded.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
-          <article className="panel rounded-[1.75rem] p-6">
+          <article className="panel rounded-[1.25rem] p-6">
             <h2 className="text-2xl font-bold text-navy">Optional extras</h2>
-            <ul className="mt-5 space-y-3 text-base leading-7 text-muted">
+            <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
               {service.extras.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
@@ -119,11 +122,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="shell">
           <div className="grid gap-6 xl:grid-cols-3">
             {service.checklist.map((section) => (
-              <article key={section.title} className="panel rounded-[1.75rem] p-6">
+              <article key={section.title} className="panel rounded-[1.25rem] p-6">
                 <h2 className="text-2xl font-bold text-navy">{section.title}</h2>
-                <ul className="mt-5 space-y-3 text-base leading-7 text-muted">
+                <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
                   {section.items.map((item) => (
-                    <li key={item}>• {item}</li>
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
               </article>
@@ -134,26 +137,26 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <section className="section-space pt-0">
         <div className="shell grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
-          <article className="panel rounded-[1.75rem] p-6">
+          <article className="panel rounded-[1.25rem] p-6">
             <h2 className="text-2xl font-bold text-navy">Preparation instructions</h2>
-            <ul className="mt-5 space-y-3 text-base leading-7 text-muted">
+            <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
               {service.preparation.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
 
             <h3 className="mt-8 text-xl font-bold text-navy">Service-area notes</h3>
-            <ul className="mt-4 space-y-3 text-base leading-7 text-muted">
+            <ul className="mt-4 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
               {service.serviceAreaNotes.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
-          <article className="surface-card rounded-[1.75rem] p-6">
+          <article className="surface-card rounded-[1.25rem] p-6">
             <h2 className="text-2xl font-bold text-navy">Good fit for</h2>
-            <ul className="mt-5 space-y-3 text-base leading-7 text-muted">
+            <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
               {service.suitableFor.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
@@ -164,12 +167,19 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="shell">
           <div className="grid gap-6 xl:grid-cols-3">
             {beforeAfterStories.slice(0, 3).map((story) => (
-              <article key={story.title} className="panel rounded-[1.75rem] p-6">
-                <div className="text-sm font-semibold text-turquoise">{story.category}</div>
-                <h2 className="mt-3 text-xl font-bold text-navy">{story.title}</h2>
-                <p className="mt-4 text-base leading-7 text-muted">
-                  {story.outcome}
-                </p>
+              <article key={story.title} className="panel overflow-hidden rounded-[1.25rem]">
+                <div className="relative aspect-[4/3]">
+                  <Image src={story.image} alt={story.alt} fill className="object-cover" sizes="(max-width: 1280px) 100vw, 33vw" />
+                </div>
+                <div className="p-6">
+                  <div className="text-sm font-semibold text-turquoise">{story.category}</div>
+                  <h2 className="mt-3 text-xl font-bold text-navy">{story.title}</h2>
+                  <p className="mt-4 text-base leading-7 text-muted">{story.outcome}</p>
+                  <div className="mt-5 flex flex-wrap gap-2 text-sm text-navy">
+                    <span className="rounded-full bg-[rgba(29,55,72,0.05)] px-3 py-1">{story.scope}</span>
+                    <span className="rounded-full bg-[rgba(29,55,72,0.05)] px-3 py-1">{story.turnaround}</span>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
@@ -184,11 +194,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <FaqList items={relevantFaqs.length ? relevantFaqs : faqs.slice(0, 4)} />
             </div>
           </div>
-          <div className="surface-card rounded-[1.75rem] p-6">
+          <div className="surface-card rounded-[1.25rem] p-6">
             <div className="text-sm font-semibold text-turquoise">Booking note</div>
             <p className="mt-4 text-base leading-7 text-muted">
-              Quote requests are reviewed manually before anything is confirmed.
-              That keeps access, timing, and condition from being guessed.
+              Quote requests are reviewed manually before anything is confirmed. That keeps access, timing, and property condition from being guessed.
             </p>
           </div>
         </div>
@@ -199,18 +208,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <PageIntro
             eyebrow="Quote form"
             title={`Request a ${service.name.toLowerCase()} quote`}
-            description="Use the structured form below to capture scope, access, and contact details in one pass."
+            description="Use the form below to capture property details, access notes, and contact preferences in one pass."
           />
           <div className="mt-2">
             <QuoteForm
               sourcePage={`service-page-${service.slug}`}
               defaults={{ serviceSlug: service.slug }}
+              locale={locale}
+              quotePromise={companyContent.quotePromise}
             />
           </div>
         </div>
       </section>
 
-      <CtaBanner />
+      <CtaBanner locale={locale} />
     </>
   );
 }

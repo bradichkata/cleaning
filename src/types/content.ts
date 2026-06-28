@@ -63,19 +63,27 @@ export type FaqItem = {
 };
 
 export type ReviewSlot = {
-  title: string;
-  prompt: string;
+  id: string;
+  author: string;
+  quote: string;
   service: string;
   location: string;
+  dateLabel: string;
   source: string;
+  rating: number;
+  outcome: string;
 };
 
 export type BeforeAfterStory = {
   category: string;
   title: string;
+  image: string;
+  alt: string;
   before: string;
   after: string;
   outcome: string;
+  scope: string;
+  turnaround: string;
 };
 
 export type BlogCard = {

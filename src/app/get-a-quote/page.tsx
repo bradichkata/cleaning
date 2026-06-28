@@ -16,17 +16,14 @@ function readQueryValue(value: string | string[] | undefined) {
 export const metadata: Metadata = buildMetadata({
   title: "Get a Quote",
   description:
-    "Request a structured cleaning quote with estimate guidance, scope questions, access notes, and contact preferences.",
+    "Request a structured cleaning quote with guided pricing, access notes, timing preferences, and contact details.",
   path: "/get-a-quote",
 });
 
-export default async function GetAQuotePage({
-  searchParams,
-}: QuotePageProps) {
+export default async function GetAQuotePage({ searchParams }: QuotePageProps) {
   const locale = await getCurrentLocale();
   const companyContent = getCompanyContent(locale);
   const query = await searchParams;
-  const isBg = locale === "bg";
 
   const defaults = {
     serviceSlug: readQueryValue(query.serviceSlug),
@@ -39,43 +36,18 @@ export default async function GetAQuotePage({
   return (
     <>
       <PageIntro
-        eyebrow={isBg ? "Запитване за оферта" : "Quote request"}
-        title={
-          isBg
-            ? "Кажете ни какво трябва да се почисти. Ще върнем ясен следващ практически ход."
-            : "Tell us what needs cleaning. We will return a clear, reviewable next step."
-        }
-        description={
-          isBg
-            ? "Формата е създадена да събира полезен контекст за оферта, без да се преструва, че автоматично потвърждава график, време за пътуване или крайна цена."
-            : "This form is built to capture useful quoting context without pretending to auto-confirm staff schedules, travel time, or final pricing."
-        }
+        eyebrow="Quote request"
+        title="Tell us what needs cleaning and we will return a clear next step."
+        description="This form gathers the property, access, and timing details needed to give you a realistic range before the visit is confirmed."
         aside={
           <>
-            <div className="text-sm font-semibold text-turquoise">
-              {isBg ? "Защо това работи" : "Why this works"}
-            </div>
-            <ul className="mt-4 space-y-3 text-base leading-7 text-muted">
-              <li>
-                •{" "}
-                {isBg
-                  ? "Ориентировъчният ценови диапазон се показва веднага за по-голяма увереност."
-                  : "Estimate ranges are shown immediately for customer confidence."}
-              </li>
-              <li>
-                •{" "}
-                {isBg
-                  ? "Обхватът, достъпът и контактните данни се събират в един структуриран запис."
-                  : "Scope, access, and contact details are stored in one structured record."}
-              </li>
-              <li>
-                •{" "}
-                {isBg
-                  ? "Крайното потвърждение на часа остава ръчно."
-                  : "Final appointment confirmation still happens manually."}
-              </li>
+            <div className="text-sm font-semibold text-turquoise">What to expect</div>
+            <ul className="mt-4 list-disc space-y-3 pl-5 text-base leading-7 text-muted">
+              <li>Guided pricing in EUR while the request is still under review.</li>
+              <li>One structured record for scope, access, and contact details.</li>
+              <li>A real coordinator confirms the final visit window.</li>
             </ul>
-            <p className="mt-5 rounded-[1.25rem] bg-[rgba(16,42,67,0.04)] p-4 text-sm leading-7 text-muted">
+            <p className="mt-5 rounded-[1rem] bg-[rgba(29,55,72,0.04)] p-4 text-sm leading-7 text-muted">
               {companyContent.quotePromise}
             </p>
           </>

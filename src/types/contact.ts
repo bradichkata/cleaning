@@ -16,6 +16,7 @@ export type ContactRequestRecord = {
   serviceInterest: string;
   preferredContactMethod: ContactMethod;
   message: string;
+  consent: boolean;
   status: "new";
   sourcePage: string;
 };

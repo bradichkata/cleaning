@@ -23,6 +23,7 @@ export function createContactRecord(
     serviceInterest: input.serviceInterest,
     preferredContactMethod: input.preferredContactMethod,
     message: input.message,
+    consent: input.consent,
     status: "new",
     sourcePage: input.sourcePage,
   };

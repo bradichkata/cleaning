@@ -103,6 +103,7 @@ export type QuoteRequestRecord = {
   email: string;
   preferredContactMethod: "phone" | "email" | "whatsapp";
   message: string;
+  consent: boolean;
   estimatedPriceMin: number | null;
   estimatedPriceMax: number | null;
   status: "new";

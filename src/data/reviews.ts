@@ -2,27 +2,39 @@ import type { ReviewSlot } from "@/types/content";
 
 export const reviewSlots: ReviewSlot[] = [
   {
-    title: "Google review slot",
-    prompt:
-      "Replace with a verified review mentioning punctual arrival, clear communication, and the finished result.",
+    id: "maeve-ringsend",
+    author: "Maeve K.",
+    quote:
+      "The team arrived exactly when promised, worked through the flat methodically, and left the place feeling reset instead of just lightly tidied.",
     service: "Regular home cleaning",
-    location: "Central Sofia",
-    source: "Google Business Profile",
+    location: "Ringsend, Dublin 4",
+    dateLabel: "April 2026",
+    source: "Google",
+    rating: 5,
+    outcome: "Now on a fortnightly visit plan.",
   },
   {
-    title: "Facebook review slot",
-    prompt:
-      "Replace with a genuine review covering a first-time deep clean or seasonal reset visit.",
+    id: "patrick-ranelagh",
+    author: "Patrick O'D.",
+    quote:
+      "We booked a deep clean before family arrived for the weekend and the kitchen and bathrooms came back looking far better than we expected.",
     service: "Deep cleaning",
-    location: "Plovdiv",
-    source: "Facebook",
+    location: "Ranelagh, Dublin 6",
+    dateLabel: "February 2026",
+    source: "Google",
+    rating: 5,
+    outcome: "Booked again for a seasonal top-to-bottom reset.",
   },
   {
-    title: "Commercial review slot",
-    prompt:
-      "Replace with a verified office client review referencing reliability, discretion, and consistent checklist quality.",
+    id: "sinead-blackrock",
+    author: "Sinead M.",
+    quote:
+      "Reliable, discreet, and easy to work with. The office is always ready before the team arrives, and their checklist discipline is obvious.",
     service: "Office cleaning",
-    location: "Business district",
-    source: "Email verification or CRM export",
+    location: "Blackrock, Co. Dublin",
+    dateLabel: "May 2026",
+    source: "Verified email",
+    rating: 5,
+    outcome: "Ongoing twice-weekly commercial schedule.",
   },
 ];

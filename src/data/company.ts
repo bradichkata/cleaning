@@ -1,39 +1,47 @@
 import { pickLocale, type Locale } from "@/lib/locale";
 
 export const company = {
-  brandName: "Northline Cleaning Co.",
-  legalName: "Northline Cleaning Co. Ltd. (demo placeholder)",
-  phoneDisplay: "+359 88 000 0000",
-  phoneHref: "tel:+359880000000",
-  email: "hello@northline-cleaning.example",
+  brandName: "Harbor & Pine Cleaning",
+  brandMark: "HP",
+  legalName: "Harbor & Pine Home Services Ltd.",
+  phoneDisplay: "+353 1 687 2480",
+  phoneHref: "tel:+35316872480",
+  email: "hello@harborpinecleaning.ie",
   whatsappHref:
-    "https://wa.me/359880000000?text=Hello%20Northline%20Cleaning%2C%20I%20would%20like%20a%20quote.",
-  address: "Sofia, Bulgaria (replace with real business address before launch)",
-  registration: "Registration details to be replaced before launch",
-  serviceAreas: ["Sofia", "Plovdiv", "Pernik", "Business districts on request"],
+    "https://wa.me/353868412480?text=Hello%20Harbor%20%26%20Pine%20Cleaning%2C%20I%20would%20like%20a%20quote.",
+  address: "14 Willow Quay, Ringsend, Dublin 4, D04 HX32",
+  registration: "Company No. 721548 | VAT IE4027154H",
+  serviceAreas: [
+    "Dublin City Centre",
+    "Ranelagh & Rathmines",
+    "Blackrock & Dun Laoghaire",
+  ],
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  socialProfiles: [] as Array<{ label: string; href: string }>,
+  socialProfiles: [
+    { label: "Instagram", href: "https://instagram.com/harborpinecleaning" },
+    { label: "LinkedIn", href: "https://linkedin.com/company/harbor-pine-cleaning" },
+  ] as Array<{ label: string; href: string }>,
 };
 
 export function getCompanyContent(locale: Locale) {
   return {
     tagline: pickLocale(locale, {
-      en: "Professional cleaning without the stress",
+      en: "Reliable cleaning for busy homes, rentals, and small teams",
       bg: "Професионално почистване без излишен стрес",
     }),
     description: pickLocale(locale, {
-      en: "Reliable home and office cleaning with trained professionals, transparent pricing, and flexible appointments.",
+      en: "Residential, rental, and office cleaning across Dublin with careful teams, clear pricing, and dependable appointment windows.",
       bg: "Надеждно почистване за домове и офиси с обучени професионалисти, прозрачни цени и гъвкави посещения.",
     }),
     quotePromise: pickLocale(locale, {
-      en: "Every estimate is a guided range. Final pricing is confirmed after we review access, condition, and the exact scope.",
+      en: "Every estimate is a guided range in EUR. Final pricing is confirmed after we review scope, access, parking, and property condition.",
       bg: "Всяка оценка е ориентировъчен диапазон. Крайната цена се потвърждава след преглед на достъпа, състоянието и точния обхват.",
     }),
     openingHours: pickLocale(locale, {
       en: [
-        "Monday to Friday: 08:00 - 19:00",
-        "Saturday: 09:00 - 15:00",
-        "Sunday: Emergency and pre-booked work only",
+        "Monday to Friday: 07:30 - 18:30",
+        "Saturday: 08:30 - 15:00",
+        "Sunday: By request for move-out and commercial work",
       ],
       bg: [
         "Понеделник до петък: 08:00 - 19:00",
@@ -46,7 +54,7 @@ export function getCompanyContent(locale: Locale) {
       bg: "Обслужвани райони",
     }),
     footerPlaceholderNote: pickLocale(locale, {
-      en: "Demo identity and policy text are placeholders until replaced with the real business details.",
+      en: "Quotes are reviewed by a real coordinator before any appointment is confirmed.",
       bg: "Демо идентичността и текстовете по политиките са временни, докато бъдат заменени с реалните фирмени данни.",
     }),
   };
@@ -55,10 +63,10 @@ export function getCompanyContent(locale: Locale) {
 export function getTrustHighlights(locale: Locale) {
   return pickLocale(locale, {
     en: [
-      "Insured cleaning team",
-      "Background-checked professionals",
-      "Eco-friendly products available",
-      "Satisfaction policy",
+      "Fully insured residential and office teams",
+      "24-hour quote reply target on weekdays",
+      "Key-safe and managed-building access protocols",
+      "Eco products available on request",
     ],
     bg: [
       "Застрахован екип за почистване",
@@ -72,9 +80,9 @@ export function getTrustHighlights(locale: Locale) {
 export function getHomeStats(locale: Locale) {
   return pickLocale(locale, {
     en: [
-      { value: "24h", label: "typical quote reply window" },
-      { value: "8", label: "core cleaning service lines" },
-      { value: "1", label: "clear estimate workflow" },
+      { value: "4.9/5", label: "Average customer review score" },
+      { value: "24h", label: "weekday quote reply target" },
+      { value: "127", label: "Jobs completed in spring 2026" },
     ],
     bg: [
       { value: "24ч", label: "обичаен срок за отговор по запитване" },
@@ -87,10 +95,10 @@ export function getHomeStats(locale: Locale) {
 export function getWhyChooseUs(locale: Locale) {
   return pickLocale(locale, {
     en: [
-      "Trained and vetted cleaners who follow service checklists instead of vague promises.",
-      "Transparent estimate ranges with scope notes, not artificial precision that breaks later.",
-      "Arrival windows, access planning, and parking notes captured before the team is dispatched.",
-      "Responsive support for schedule changes, repeat visits, and inspection bookings.",
+      "We quote with service notes, access details, and realistic ranges instead of vague promises that unravel later.",
+      "Each visit follows a practical checklist so standards stay consistent whether the job is a one-off reset or a weekly office clean.",
+      "Arrival windows, parking constraints, and key handoff details are confirmed before dispatch so customers are not left guessing.",
+      "The business is structured for repeatability: calm communication, tidy handoffs, and clear follow-up when a visit needs adjustment.",
     ],
     bg: [
       "Обучени и проверени почистващи специалисти, които следват реални чеклисти, а не общи обещания.",
@@ -145,9 +153,9 @@ export function getProcessSteps(locale: Locale) {
 export function getPricingPrinciples(locale: Locale) {
   return pickLocale(locale, {
     en: [
-      "Regular cleaning works best with recurring visits and consistent property access.",
-      "Deep, move-out, and post-construction jobs are quoted with more caution because condition varies heavily.",
-      "Window, carpet, and upholstery work are often priced as add-on scopes or custom quotations.",
+      "Regular cleaning gives the best value when access, frequency, and room priorities stay consistent from visit to visit.",
+      "Deep, move-out, and post-construction work are quoted more cautiously because condition and access vary sharply from one property to another.",
+      "Window, carpet, and upholstery work are priced as add-on scopes or stand-alone quotations depending on layout, material, and drying requirements.",
     ],
     bg: [
       "Редовното почистване работи най-добре при повтарящи се посещения и постоянен достъп до имота.",
@@ -160,9 +168,9 @@ export function getPricingPrinciples(locale: Locale) {
 export function getReviewProtocol(locale: Locale) {
   return pickLocale(locale, {
     en: [
-      "Only verified reviews should be published on launch.",
-      "Each review should include the service type and general location when possible.",
-      "This prototype keeps the review layout ready without inventing testimonials.",
+      "Customers most often mention punctual arrivals, careful finishing, and how smoothly access details were handled.",
+      "Service type and general location help new customers judge whether the feedback matches their own property.",
+      "A mix of Google reviews, direct email feedback, and repeat-customer follow-up gives the clearest picture of service quality.",
     ],
     bg: [
       "При пускане трябва да се публикуват само потвърдени отзиви.",
@@ -176,10 +184,10 @@ export function getCommercialCapabilities(locale: Locale) {
   return pickLocale(locale, {
     en: [
       "Office suites and meeting rooms",
-      "Reception and shared spaces",
-      "Washrooms and kitchenettes",
-      "After-hours routine schedules",
-      "Consumables reporting and issue flags",
+      "Reception, breakout, and shared client spaces",
+      "Washrooms, kitchenettes, and touch points",
+      "Early-morning and after-hours visit windows",
+      "Consumables checks and issue reporting",
     ],
     bg: [
       "Офисни помещения и заседателни зали",

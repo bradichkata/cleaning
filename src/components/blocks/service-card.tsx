@@ -4,7 +4,7 @@ import type { Service } from "@/types/content";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
-    <article className="panel rounded-[1.75rem] p-6 transition duration-200 hover:-translate-y-1">
+    <article className="panel rounded-[1.25rem] p-6 transition duration-200">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <span className="eyebrow">{service.heroTag}</span>
         <div className="text-sm text-muted sm:text-right">
@@ -18,7 +18,7 @@ export function ServiceCard({ service }: { service: Service }) {
         {service.suitableFor.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-[rgba(16,42,67,0.05)] px-3 py-1 text-sm text-navy"
+            className="rounded-full bg-[rgba(29,55,72,0.05)] px-3 py-1 text-sm text-navy"
           >
             {tag}
           </span>

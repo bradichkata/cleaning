@@ -16,15 +16,15 @@ export function buttonClasses({
   className?: string;
 }) {
   return cx(
-    "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-200",
+    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition duration-200",
     size === "md" && "min-h-12 px-5 text-sm",
     size === "lg" && "min-h-14 px-6 text-base",
     tone === "primary" &&
-      "bg-navy text-white shadow-[0_20px_40px_rgba(16,42,67,0.18)] hover:-translate-y-0.5 hover:bg-navy-soft",
+      "bg-navy text-white shadow-[0_18px_38px_rgba(15,31,42,0.18)] hover:bg-navy-soft",
     tone === "secondary" &&
-      "border border-[rgba(16,42,67,0.12)] bg-white text-navy hover:-translate-y-0.5 hover:border-[rgba(28,181,163,0.35)] hover:text-navy-soft",
+      "border border-[rgba(21,45,62,0.14)] bg-[rgba(255,250,244,0.62)] text-navy hover:border-[rgba(29,125,112,0.4)] hover:bg-[rgba(255,250,244,0.78)] hover:text-navy-soft",
     tone === "ghost" &&
-      "text-navy hover:bg-[rgba(16,42,67,0.04)] hover:text-navy-soft",
+      "text-navy hover:bg-[rgba(21,45,62,0.06)] hover:text-navy-soft",
     fullWidth && "w-full",
     className,
   );

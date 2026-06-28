@@ -8,15 +8,13 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact page with callback request, service-interest form, and business details ready for replacement with the live brand.",
+    "Contact Harbor & Pine Cleaning for follow-up questions, commercial enquiries, or callback requests across Dublin.",
   path: "/contact",
 });
 
 export default function ContactPage() {
   const localePromise = getCurrentLocale();
-  return (
-    <ContactPageContent localePromise={localePromise} />
-  );
+  return <ContactPageContent localePromise={localePromise} />;
 }
 
 async function ContactPageContent({
@@ -26,50 +24,43 @@ async function ContactPageContent({
 }) {
   const locale = await localePromise;
   const companyContent = getCompanyContent(locale);
-  const isBg = locale === "bg";
 
   return (
     <>
       <PageIntro
-        eyebrow={isBg ? "Контакт" : "Contact"}
-        title={
-          isBg
-            ? "Използвайте страницата за контакт, когато искате обратно обаждане преди пълна оферта."
-            : "Use the contact page when you need a callback before a full quote."
-        }
-        description={
-          isBg
-            ? "Формата за оферта е най-добра за структурирани ценови запитвания. Тази страница е за последващи въпроси, търговски разговори или по-бързо ръчно насочване."
-            : "The quote flow is best for structured pricing requests. This page is for follow-up questions, commercial conversations, or quicker manual routing."
-        }
+        eyebrow="Contact"
+        title="Get in touch when you want to talk through the job first."
+        description="Use the quote form for pricing requests. Use this page when you want a callback, have a commercial question, or need help deciding which service fits."
       />
       <section className="section-space pt-0">
         <div className="shell grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
           <ContactForm sourcePage="contact-page" locale={locale} />
-          <aside className="surface-card rounded-[1.75rem] p-6">
-            <h2 className="text-2xl font-bold text-navy">
-              {isBg ? "Данни за контакт" : "Contact details"}
-            </h2>
+          <aside className="surface-card rounded-[1.25rem] p-6">
+            <h2 className="text-2xl font-bold text-navy">Contact details</h2>
             <div className="mt-5 space-y-3 text-base leading-7 text-muted">
               <p>
-                <strong className="text-navy">{isBg ? "Телефон:" : "Phone:"}</strong>{" "}
-                {company.phoneDisplay}
+                <strong className="text-navy">Phone:</strong>{" "}
+                <a className="font-medium text-navy transition hover:text-turquoise" href={company.phoneHref}>
+                  {company.phoneDisplay}
+                </a>
               </p>
               <p>
-                <strong className="text-navy">{isBg ? "Имейл:" : "Email:"}</strong>{" "}
-                {company.email}
+                <strong className="text-navy">Email:</strong>{" "}
+                <a
+                  className="font-medium text-navy transition hover:text-turquoise"
+                  href={`mailto:${company.email}`}
+                >
+                  {company.email}
+                </a>
               </p>
               <p>
-                <strong className="text-navy">{isBg ? "Адрес:" : "Address:"}</strong>{" "}
-                {company.address}
+                <strong className="text-navy">Address:</strong> {company.address}
               </p>
             </div>
-            <h3 className="mt-8 text-xl font-bold text-navy">
-              {isBg ? "Работно време" : "Opening hours"}
-            </h3>
-            <ul className="mt-4 space-y-2 text-base leading-7 text-muted">
+            <h3 className="mt-8 text-xl font-bold text-navy">Opening hours</h3>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-7 text-muted">
               {companyContent.openingHours.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </aside>

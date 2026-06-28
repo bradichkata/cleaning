@@ -11,26 +11,27 @@ export const policies: Record<
   privacy: {
     title: "Privacy Policy",
     description:
-      "How quote requests, contact messages, and operational details are handled in this prototype and future live setup.",
+      "How Harbor & Pine Cleaning handles quote requests, contact messages, and operational scheduling details.",
     sections: [
       {
         title: "Information we collect",
         body: [
-          "We collect the contact details, property notes, scheduling preferences, and service selections that you submit through quote or contact forms.",
-          "This prototype also stores operational metadata such as the page where the enquiry started and any campaign tags that help attribute leads.",
+          "We collect the contact details, property notes, scheduling preferences, and service selections that you submit through our quote and contact forms.",
+          "We also store operational metadata such as the page where an enquiry started and any campaign tags used to measure lead sources.",
         ],
       },
       {
         title: "How we use it",
         body: [
-          "Submitted information is used to respond to quote requests, plan service scope, and arrange follow-up communication.",
-          "Operational analytics and attribution should only be connected after the business confirms the exact tools and consent wording it intends to use.",
+          "Submitted information is used to respond to quote requests, review service scope, schedule follow-up communication, and keep a record of confirmed appointments.",
+          "We do not sell enquiry data. Information is only shared with service providers used to run the business, such as email delivery or hosted data storage.",
         ],
       },
       {
-        title: "Launch requirement",
+        title: "Retention and contact",
         body: [
-          "Replace this draft with business-specific legal wording, retention periods, processor details, and the real data controller before launch.",
+          "Quote and contact records are retained for up to 12 months unless they become part of an active customer file or a longer retention period is required by law.",
+          "For privacy questions or deletion requests, contact hello@harborpinecleaning.ie.",
         ],
       },
     ],
@@ -38,24 +39,24 @@ export const policies: Record<
   cookies: {
     title: "Cookie Policy",
     description:
-      "A draft policy structure for analytics and functional cookies once the business confirms its tracking stack.",
+      "How Harbor & Pine Cleaning uses essential and measurement cookies on this website.",
     sections: [
       {
         title: "Essential cookies",
         body: [
-          "The final live site may use essential cookies for routing, security, and form-session stability.",
+          "Essential cookies may be used to support routing, spam protection, rate-limiting signals, and form-session stability.",
         ],
       },
       {
-        title: "Analytics cookies",
+        title: "Measurement cookies",
         body: [
-          "Analytics should only be enabled after the business selects a provider and confirms consent requirements for its market.",
+          "Measurement cookies may be used to understand which pages and quote paths are performing well, but only in line with the consent choices available on the site.",
         ],
       },
       {
-        title: "Launch requirement",
+        title: "Control",
         body: [
-          "Update this page once the real analytics, call tracking, chat, or ad pixels are chosen.",
+          "You can manage non-essential cookies through your browser settings. Essential cookies are required for core site and form behavior.",
         ],
       },
     ],
@@ -63,26 +64,27 @@ export const policies: Record<
   terms: {
     title: "Terms and Conditions",
     description:
-      "Commercial terms draft covering quotes, scope confirmation, site access, and service limitations.",
+      "Commercial terms covering estimates, scope confirmation, access, and service limitations.",
     sections: [
       {
         title: "Quotes and bookings",
         body: [
           "Online quote requests are enquiries, not automatically confirmed appointments.",
-          "Work is confirmed only after the business reviews access, condition, scope, and scheduling availability.",
+          "Work is confirmed only after Harbor & Pine Cleaning reviews access, condition, scope, and scheduling availability.",
         ],
       },
       {
         title: "Scope boundaries",
         body: [
-          "Cleaning scope should distinguish routine cleaning from restoration, damage repair, pest-related cleanup, and specialist remediation.",
-          "Anything outside the agreed checklist should be documented and approved before being treated as included work.",
+          "Cleaning scope distinguishes routine and deep cleaning from restoration, damage repair, pest-related cleanup, and specialist remediation.",
+          "Anything outside the agreed checklist must be documented and approved before it is treated as included work.",
         ],
       },
       {
-        title: "Launch requirement",
+        title: "Payments and access",
         body: [
-          "Replace this draft with legal terms aligned with your insurer, local laws, and your real cancellation and payment process.",
+          "Payment timing is confirmed during booking. If access, utilities, or parking arrangements materially differ from the agreed brief, pricing or appointment timing may change.",
+          "Clients are responsible for flagging fragile surfaces, alarm procedures, pets, and any access restrictions before the visit.",
         ],
       },
     ],
@@ -90,24 +92,24 @@ export const policies: Record<
   "cancellation-policy": {
     title: "Cancellation Policy",
     description:
-      "Draft cancellation framework for one-off and recurring appointments.",
+      "Cancellation and rescheduling rules for one-off and recurring appointments.",
     sections: [
       {
         title: "Notice windows",
         body: [
-          "A fair notice window should be defined for one-off cleans, recurring visits, and last-minute access problems.",
+          "Please give at least 24 hours notice for standard residential appointments and 48 hours notice for larger one-off or commercial visits where possible.",
         ],
       },
       {
         title: "Access issues",
         body: [
-          "If the team cannot gain access, parking is impossible, or utilities required for the job are unavailable, the business may need to reschedule or apply a call-out fee.",
+          "If the team cannot gain access, parking is unavailable, or utilities required for the job are not working, we may need to reschedule or apply a call-out charge.",
         ],
       },
       {
-        title: "Launch requirement",
+        title: "Late changes",
         body: [
-          "Confirm the actual cancellation deadlines, fees, and exceptions before the site goes live.",
+          "Late cancellations and repeated schedule changes may be charged when team time and travel have already been committed to the booking.",
         ],
       },
     ],
@@ -115,24 +117,24 @@ export const policies: Record<
   "satisfaction-guarantee": {
     title: "Satisfaction Guarantee",
     description:
-      "Draft wording for re-clean review windows and scope-based issue handling.",
+      "How Harbor & Pine Cleaning reviews missed tasks and post-visit concerns.",
     sections: [
       {
         title: "Reporting an issue",
         body: [
-          "Customers should report any concern within 24 hours so the business can review it against the original checklist and scope.",
+          "Please report any concern within 24 hours so we can review it against the original checklist, service notes, and access conditions from the visit.",
         ],
       },
       {
         title: "How issues are reviewed",
         body: [
-          "The guarantee should distinguish between missed cleaning tasks, newly noticed pre-existing damage, and services that were never part of the agreed scope.",
+          "We distinguish between missed cleaning tasks, pre-existing damage, and work that was never part of the agreed scope before arranging any return visit.",
         ],
       },
       {
-        title: "Launch requirement",
+        title: "Resolution",
         body: [
-          "Replace this draft with the exact policy the company is genuinely willing to honor in day-to-day operations.",
+          "Where a service issue clearly falls within the agreed scope, we will arrange a practical follow-up or credit resolution that matches the original booking.",
         ],
       },
     ],

@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7fafc;
-  --foreground: #1c2733;
-  --navy: #102a43;
-  --navy-soft: #163c5b;
-  --turquoise: #1cb5a3;
-  --turquoise-soft: #d8f6f2;
-  --surface: rgba(255, 255, 255, 0.9);
-  --surface-solid: #ffffff;
-  --muted: #607080;
-  --line: rgba(16, 42, 67, 0.12);
-  --success: #36a269;
-  --gold: #e9a23b;
-  --shadow: 0 24px 60px rgba(16, 42, 67, 0.08);
+  --background: #ece6dc;
+  --foreground: #18242d;
+  --navy: #173142;
+  --navy-soft: #23485f;
+  --turquoise: #1d7d70;
+  --turquoise-soft: rgba(29, 125, 112, 0.14);
+  --surface: rgba(255, 249, 242, 0.64);
+  --surface-solid: rgba(255, 251, 246, 0.78);
+  --muted: #51616b;
+  --line: rgba(21, 45, 62, 0.16);
+  --success: #2f8d61;
+  --gold: #b67f33;
+  --shadow: 0 24px 56px rgba(15, 31, 42, 0.12);
+  --header-height: 5.5rem;
 }
 
 @theme inline {
@@ -39,10 +40,15 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
 }
 
 body {
-  background: var(--background);
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at top left, rgba(29, 125, 112, 0.14), transparent 34%),
+    radial-gradient(circle at top right, rgba(23, 49, 66, 0.08), transparent 30%),
+    linear-gradient(180deg, #f3eee5 0%, var(--background) 34%, #e7e0d6 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
@@ -75,14 +81,14 @@ textarea {
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 }
 
 @layer components {
   .shell {
     margin-inline: auto;
-    width: min(1180px, 100%);
+    width: min(1600px, 100%);
     padding-inline: clamp(1rem, 3vw, 2rem);
   }
 
@@ -94,26 +100,29 @@ textarea {
     border: 1px solid var(--line);
     background: var(--surface);
     box-shadow: var(--shadow);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .panel {
     border: 1px solid var(--line);
     background: var(--surface-solid);
     box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 9999px;
-    border: 1px solid rgba(28, 181, 163, 0.28);
-    background: rgba(28, 181, 163, 0.1);
+    border-radius: 0.9rem;
+    border: 1px solid rgba(29, 125, 112, 0.26);
+    background: rgba(29, 125, 112, 0.12);
     padding: 0.45rem 0.85rem;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--navy);
   }
@@ -121,9 +130,9 @@ textarea {
   .input-field {
     min-height: 3rem;
     width: 100%;
-    border-radius: 1rem;
-    border: 1px solid rgba(16, 42, 67, 0.14);
-    background: rgba(255, 255, 255, 0.96);
+    border-radius: 0.95rem;
+    border: 1px solid rgba(21, 45, 62, 0.18);
+    background: rgba(255, 255, 255, 0.72);
     padding-inline: 0.95rem;
     color: var(--foreground);
     transition:
@@ -134,8 +143,8 @@ textarea {
 
   .input-field:hover,
   .input-field:focus {
-    border-color: rgba(28, 181, 163, 0.6);
-    box-shadow: 0 0 0 4px rgba(28, 181, 163, 0.1);
+    border-color: rgba(29, 125, 112, 0.52);
+    box-shadow: 0 0 0 4px rgba(29, 125, 112, 0.12);
   }
 
   .textarea-field {
@@ -148,5 +157,11 @@ textarea {
     color: var(--muted);
     font-size: 0.925rem;
     line-height: 1.65;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: 6rem;
   }
 }

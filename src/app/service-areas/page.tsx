@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Service Areas",
   description:
-    "Explore the current coverage structure, response-time notes, and travel-fee guidance for each area page in the MVP.",
+    "Explore Harbor & Pine Cleaning coverage across central and south Dublin, including travel notes and response-time guidance.",
   path: "/service-areas",
 });
 
@@ -17,8 +17,8 @@ export default function ServiceAreasPage() {
     <>
       <PageIntro
         eyebrow="Coverage"
-        title="Service-area pages built for real local detail, not bulk-generated filler."
-        description="Each area page is ready for genuine coverage notes, timing expectations, and service emphasis. That gives you stronger local SEO without bloating the site with empty duplicates."
+        title="Focused coverage across the Dublin areas we can serve reliably."
+        description="We keep the coverage map practical so arrival windows stay dependable and repeat bookings stay easy to plan."
       />
       <section className="section-space pt-0">
         <div className="shell grid gap-6 md:grid-cols-2 xl:grid-cols-3">

@@ -41,6 +41,7 @@ export function createQuoteRecord(
     email: input.email,
     preferredContactMethod: input.preferredContactMethod,
     message: input.message,
+    consent: input.consent,
     estimatedPriceMin: estimate?.min ?? null,
     estimatedPriceMax: estimate?.max ?? null,
     status: "new",
